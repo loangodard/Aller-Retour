@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const mongoose = require('mongoose')
 
 var indexRouter = require('./routes/index');
 var adminsRouter = require('./routes/admin');
@@ -40,5 +41,13 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+console.log(process.env.MONGO_DB_USER)
+mongoose.connect('mongodb+srv://'+process.env.MONGO_DB_USER+':'+process.env.MONGO_DB_PASSWORD+'@lfc-dufxi.mongodb.net/'+process.env.MONGO_DB_DBNAME+'?retryWrites=true&w=majority',{useNewUrlParser: true ,useUnifiedTopology: true })
+        .then(r => {
+          console.log('connected with mongoose')
+        }).catch(err => {
+          console.log(err)
+        })
 
 module.exports = app;
