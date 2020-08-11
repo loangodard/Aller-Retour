@@ -1,17 +1,22 @@
 <%-include('./includes/header.ejs')%>
-  </head>
-  <%-include('./includes/navigation.ejs')%>
-  <body>
-    <h1>Inscription</h1>
-    <form action='/inscription' method='POST'>
-      <input name='nom' placeholder="Nom">
-      <input name='prenom' placeholder="Prénom">
-      <input name='tel' placeholder="téléphone" type='tel'>
-      <input name='email' placeholder="Adresse email">
-      <input name='password' placeholder="Mot de passe" type='password'>
-      <input name='repeatPassword' placeholder="Répétez le mot de passe" type='password'>
-      <button type='submit'>Confirmer</button>
-    </form>
-  </body>
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+  <h1>Inscription</h1>
+  <% if (errorMessage) { %>
+  <div class="user-message user-message--error"><%= errorMessage %></div>
+  <% } %>
+  <form action='/inscription' method='POST'>
+    <input name='nom' placeholder="Nom" required>
+    <input name='prenom' placeholder="Prénom" required>
+    <input name='tel' placeholder="téléphone" type='tel' required>
+    <input name='email' placeholder="Adresse email" required>
+    <input name='password' placeholder="Mot de passe" type='password' required>
+    <input name='repeatPassword' placeholder="Répétez le mot de passe" type='password' required>
+    <button type='submit'>Confirmer</button>
+  </form>
+</body>
 <%-include('./includes/footer.ejs')%>
+
 </html>

@@ -4,14 +4,6 @@ exports.getIndex = (req, res, next) => {
     res.render('index', { pageTitle: 'Aller-Retour' });
 }
 
-exports.getConnexion = (req, res, next) => {
-    res.render('connexion', { pageTitle: 'Connexion' });
-}
-
-exports.getInscription = (req, res, next) => {
-    res.render('inscription', { pageTitle: 'Inscription' });
-}
-
 exports.getMonCompte = (req, res, next) => {
     res.render('monCompte', { pageTitle: 'Mon Compte' });
 }

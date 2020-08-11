@@ -14,6 +14,8 @@ router.get('/mon-compte',indexController.getMonCompte)
 
 /* POST */
 router.post('/inscription',authController.postInscription)
+router.post('/connexion',authController.postConnexion)
+router.post('/deconnexion',authController.postLogout)
 
 
 
