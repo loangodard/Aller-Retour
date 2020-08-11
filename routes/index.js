@@ -1,15 +1,19 @@
 var express = require('express');
 var router = express.Router();
 const indexController = require('../controllers/index')
+const authController = require('../controllers/auth')
 
-/* GET home page. */
+/* GET */
 router.get('/', indexController.getIndex);
-router.get('/inscription',indexController.getInscription)
-router.get('/connexion',indexController.getConnexion)
+router.get('/inscription',authController.getInscription)
+router.get('/connexion',authController.getConnexion)
 router.get('/demander-un-trajet',indexController.getDemanderTrajet)
 router.get('/trajets',indexController.getVoirTrajets)
 router.get('/paiement',indexController.getPaiement)
 router.get('/mon-compte',indexController.getMonCompte)
+
+/* POST */
+router.post('/inscription',authController.postInscription)
 
 
 

@@ -1,3 +1,5 @@
+const User = require('../models/user')
+
 exports.getIndex = (req, res, next) => {
     res.render('index', { pageTitle: 'Aller-Retour' });
 }
