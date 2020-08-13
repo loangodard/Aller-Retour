@@ -11,8 +11,9 @@ exports.postDemanderTrajet = (req, res, next) => {
 
 exports.getDepart = (req, res, next) => {
     const trajetId = req.params.trajetId
+    const key = process.env.GOOGLE_API_KEY
     Trajet.findById(trajetId).then(traj => {
-        res.render('tunnel-nouveau-trajet/demanderDepart.ejs', { pageTitle: 'Départ', trajet: traj })
+        res.render('tunnel-nouveau-trajet/demanderDepart.ejs', { pageTitle: 'Départ', trajet: traj,GOOGLE_API_KEY:key})
     })
 }
 
@@ -29,8 +30,9 @@ exports.postDepart = (req, res, next) => {
 
 exports.getArrivee = (req, res, next) => {
     const trajetId = req.params.trajetId
+    const key = process.env.GOOGLE_API_KEY
     Trajet.findById(trajetId).then(traj => {
-        res.render('tunnel-nouveau-trajet/demanderArrivee.ejs', { pageTitle: 'Arrivée', trajet: traj })
+        res.render('tunnel-nouveau-trajet/demanderArrivee.ejs', { pageTitle: 'Arrivée', trajet: traj,GOOGLE_API_KEY:key })
     })
 }
 
