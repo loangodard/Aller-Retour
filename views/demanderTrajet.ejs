@@ -1,8 +1,19 @@
 <%-include('./includes/header.ejs')%>
-  </head>
-  <%-include('./includes/navigation.ejs')%>
-  <body>
-    <h1>Demander un trajet</h1>
-  </body>
-  <%-include('./includes/footer.ejs')%>
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<!-- depart>arrivee>date>heure>places -->
+
+<body>
+  <h1>Demander un trajet</h1>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis reiciendis cumque illum vel deserunt possimus modi aut eum alias? Atque eum facere laborum non magnam velit cum, facilis modi labore!</p>
+  <form action='/demander-un-trajet' method="post">
+    <button type="submit">Je demande un trajet</button>
+    <!-- <input type="date" name='dateDepart' placeholder="date de départ" id="datepicker"> -->
+  </form>
+</body>
+
+
+<%-include('./includes/footer.ejs')%>
+
 </html>

@@ -1,0 +1,21 @@
+<%-include('../includes/header.ejs')%>
+<!-- Google Maps JavaScript library -->
+
+<link rel='stylesheet' href='/stylesheets/map.css' />
+</head>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <h1>Combien de passagers serez-vous ?</h1>
+
+    <div class="row">
+        <form method="post" action="/demander-passagers">
+            <input type="number" name='nombrePassagers' placeholder="Nombre de passagers" value="<%=trajet.nombrePassagers%>">
+            <input type='hidden' name="trajetId" value="<%=trajet._id%>">
+            <Button type='submit'>Suivant</Button>
+        </form>
+    </div>
+
+</body>
+<%-include('../includes/footer.ejs')%>
+</html>

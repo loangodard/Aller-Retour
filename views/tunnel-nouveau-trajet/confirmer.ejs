@@ -1,0 +1,26 @@
+<%-include('../includes/header.ejs')%>
+<!-- Google Maps JavaScript library -->
+
+<link rel='stylesheet' href='/stylesheets/map.css' />
+</head>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <h1>Voici les détails de votre demande de trajet</h1>
+    <div class="row">
+        <h3> <%=trajet.lieu_depart%> > <%=trajet.lieu_arrivee%></h3>
+        <h4><%=trajet.date%></h4>
+        <h4><%=trajet.heure%></h4>
+        <h4><%=trajet.nombrePassagers%> passager(s)</h4>
+    </div>
+
+    <div class="row">
+        <form method="post" action="/confirmer">
+            <input type='hidden' name="trajetId" value="<%=trajet._id%>">
+            <Button type='submit'>Confirmer la demande de trajet</Button>
+        </form>
+    </div>
+
+</body>
+<%-include('../includes/footer.ejs')%>
+</html>
