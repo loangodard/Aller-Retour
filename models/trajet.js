@@ -7,7 +7,6 @@ const trajetSchema = new Schema({
     lieu_depart:{type:String},
     lieu_arrivee:{type:String},
     date:{type:String},
-    heure:{type:String},
     nombrePassagers:{type:Number},
     conducteur:{type:String},
     demandeConfirme:{type:Boolean}

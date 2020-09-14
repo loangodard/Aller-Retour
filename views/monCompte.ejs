@@ -1,11 +1,23 @@
 <%-include('./includes/header.ejs')%>
-  </head>
-  <%-include('./includes/navigation.ejs')%>
-  <body>
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+  <div class="container">
     <h1>Mon Compte</h1>
     <form action='/deconnexion' method='POST'>
-      <button type='submit'>Deconnexion</button>
+      <ul class="list-group">
+        <li class="list-group-item"><span>Nom Prénom : </span><%=user.nom%> <%=user.prenom%></li>
+        <li class="list-group-item"><span>Tel : </span><%=user.tel%></li>
+        <li class="list-group-item"><span>Email : </span><%=user.email%></li>
+      </ul>
+
+      <a class='btn btn-info' type='submit' style="color:white" href='/modifier-compte'>Modifier</a>
+      <form action='/deconnexion' method='POST'>
+      <button class='btn btn-danger' type='submit'>Deconnexion</button>
     </form>
-  </body>
-  <%-include('./includes/footer.ejs')%>
+  </div>
+</body>
+<%-include('./includes/footer.ejs')%>
+
 </html>

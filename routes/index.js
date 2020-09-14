@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 const indexController = require('../controllers/index')
 const authController = require('../controllers/auth')
-const trajetController = require('../controllers/trajets')
+const trajetController = require('../controllers/trajets');
+const trajet = require('../models/trajet');
 
 /* GET */
 router.get('/', indexController.getIndex);
@@ -12,6 +13,7 @@ router.get('/demander-un-trajet',indexController.getDemanderTrajet)
 router.get('/trajets',indexController.getVoirTrajets)
 router.get('/paiement',indexController.getPaiement)
 router.get('/mon-compte',indexController.getMonCompte)
+router.get('/modifier-compte',indexController.getModifierCompte)
 
 /*GET Tunnel demande de trajet*/
 router.get('/demander-un-trajet/:trajetId/depart',trajetController.getDepart)
@@ -27,6 +29,8 @@ router.get('/demander-un-trajet/:trajetId/demande-recue',trajetController.getDem
 router.post('/inscription',authController.postInscription)
 router.post('/connexion',authController.postConnexion)
 router.post('/deconnexion',authController.postLogout)
+router.post('/conduire',indexController.postConduire)
+router.post('/modifier-compte',indexController.postModifierCompte)
 
 /*POST Tunnel demande de trajet*/
 router.post('/demander-un-trajet',trajetController.postDemanderTrajet)

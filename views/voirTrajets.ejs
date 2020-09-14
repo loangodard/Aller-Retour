@@ -1,8 +1,31 @@
 <%-include('./includes/header.ejs')%>
-  </head>
-  <%-include('./includes/navigation.ejs')%>
-  <body>
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+  <div class="container">
     <h1>Les Trajets Demandés</h1>
+
+      <% for (trajet of trajets){%>
+        <% if(!trajet.conducteur){%>
+        <div class="card text-center">
+          <div class="card-body">
+            <h5 class="card-title"><%=trajet.lieu_depart%> - <%=trajet.lieu_arrivee%> </h5>
+            <p class="card-text">Détails du trajet...</p>
+            <form action='/conduire' method="POST" onsubmit="return confirm('Confirmer votre participation an tant que conducteur ?');">
+              <input type='hidden' value='<%=trajet._id%>' name='trajetId'>
+              <button type='submit' class="btn btn-primary">Conduire</button>
+            </form>
+          </div>
+          <div class="card-footer text-muted">
+            <%= moment(trajet.date, "DD/MM/YYYY hh:mm").locale('fr').format('dddd DD MMMM YYYY à hh:mm') %>
+          </div>
+        </div>
+        <%}%>
+      <%}%>
+
+  </div>
   </body>
   <%-include('./includes/footer.ejs')%>
-</html>
+
+      </html>

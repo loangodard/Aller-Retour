@@ -6,16 +6,44 @@
 <%-include('../includes/navigation.ejs')%>
 
 <body>
-    <h1>Quand souhaitez vous partir ?</h1>
 
-    <div class="row">
+    <div class="container">
+        <h1>Quand souhaitez vous partir ?</h1>
         <form method="post" action="/demander-date">
-            <input type="date" name='date' placeholder="date de départ" id="datepicker" value='<%=trajet.date%>'>
+            <label>Date</label>
+            <input required class="form-control datepick" type="text" id="datepicker" name="date" autocomplete="off">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="content"></div>
+                </div>
+            </div>
+
             <input type='hidden' name="trajetId" value="<%=trajet._id%>">
             <Button type='submit'>Suivant</Button>
         </form>
     </div>
 
 </body>
+<script>
+    $('#datepicker').datepicker({
+        altField: "#datepicker",
+        closeText: 'Fermer',
+        prevText: 'Précédent',
+        nextText: 'Suivant',
+        currentText: 'Aujourd\'hui',
+        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre',
+            'Octobre', 'Novembre', 'Décembre'
+        ],
+        monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.',
+            'Nov.', 'Déc.'
+        ],
+        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+        weekHeader: 'Sem.',
+        dateFormat: 'dd/mm/yy'
+    });
+</script>
 <%-include('../includes/footer.ejs')%>
+
 </html>

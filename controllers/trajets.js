@@ -1,9 +1,12 @@
 const Trajet = require('../models/trajet')
 const trajet = require('../models/trajet')
+const moment = require('moment')
+
+//moment(date, "DD/MM/YYYY hh")
 
 exports.postDemanderTrajet = (req, res, next) => {
     const userId = req.session.user._id
-    const nouveauTrajet = new Trajet({ passager: userId })
+    const nouveauTrajet = new Trajet({ passager: userId,demandeConfirme:false })
     nouveauTrajet.save().then(r => {
         res.redirect('/demander-un-trajet/' + nouveauTrajet._id + '/depart')
     })
@@ -21,7 +24,7 @@ exports.postDepart = (req, res, next) => {
     const adresse = req.body.location
     const trajetId = req.body.trajetId
     Trajet.findById(trajetId).then(traj => {
-        traj.lieu_depart = adresse
+        traj.lieu_depart = adresse.split(", France")[0]
         traj.save()
     }).then(r => {
         res.redirect('/demander-un-trajet/' + trajetId + '/arrivee')
@@ -40,7 +43,7 @@ exports.postArrivee = (req, res, next) => {
     const adresse = req.body.location
     const trajetId = req.body.trajetId
     Trajet.findById(trajetId).then(traj => {
-        traj.lieu_arrivee = adresse
+        traj.lieu_arrivee = adresse.split(", France")[0]
         traj.save()
     }).then(r => {
         res.redirect('/demander-un-trajet/' + trajetId + '/date')
@@ -55,7 +58,8 @@ exports.getDate = (req, res, next) => {
 }
 
 exports.postDate = (req, res, next) => {
-    const date = req.body.date
+    var date = req.body.date
+    console.log(date)
     const trajetId = req.body.trajetId
     Trajet.findById(trajetId).then(traj => {
         traj.date = date
@@ -73,8 +77,11 @@ exports.getHeure = (req, res, next) => {
 exports.postHeure = (req, res, next) => {
     const heure = req.body.heure
     const trajetId = req.body.trajetId
+    var date;
     Trajet.findById(trajetId).then(traj => {
-        traj.heure = heure
+        // moment(date, "DD/MM/YYYY hh")
+        date = traj.date+" "+heure,"DD/MM/YYYY hh"
+        traj.date = date
         traj.save()
     }).then(r => {
         res.redirect('/demander-un-trajet/' + trajetId + '/passagers')

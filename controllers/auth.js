@@ -28,7 +28,7 @@ exports.getInscription = (req, res, next) => {
 }
 
 exports.postConnexion = (req, res, next) => {
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     const password = req.body.password;
     User.findOne({ email: email })
         .then(user => {
@@ -59,7 +59,7 @@ exports.postConnexion = (req, res, next) => {
 };
 
 exports.postInscription = (req, res, next) => {
-    const email = req.body.email;
+    const email = req.body.email.toLowerCase();
     const nom = req.body.nom
     const prenom = req.body.prenom
     const tel = req.body.tel
