@@ -59,6 +59,7 @@ exports.postConnexion = (req, res, next) => {
 };
 
 exports.postInscription = (req, res, next) => {
+    const rang = "passager"
     const email = req.body.email.toLowerCase();
     const nom = req.body.nom
     const prenom = req.body.prenom
@@ -79,11 +80,22 @@ exports.postInscription = (req, res, next) => {
                 .hash(password, 12)
                 .then(hashedPassword => {
                     const user = new User({
+                        rang:rang,
                         email: email,
                         tel: tel,
                         nom: nom,
                         prenom: prenom,
                         password: hashedPassword,
+                        papiers:{
+                            permis:{
+                                statut:'non envoyé',
+                                lien:''
+                            },
+                            assurance:{
+                                statut:'non envoyé',
+                                lien:''
+                            }
+                        }
                     });
                     return user.save();
                 })

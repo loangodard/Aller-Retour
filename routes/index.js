@@ -3,6 +3,7 @@ var router = express.Router();
 const indexController = require('../controllers/index')
 const authController = require('../controllers/auth')
 const trajetController = require('../controllers/trajets');
+const conducteurController = require('../controllers/conducteur')
 const trajet = require('../models/trajet');
 
 /* GET */
@@ -14,6 +15,7 @@ router.get('/trajets',indexController.getVoirTrajets)
 router.get('/paiement',indexController.getPaiement)
 router.get('/mon-compte',indexController.getMonCompte)
 router.get('/modifier-compte',indexController.getModifierCompte)
+router.get('/devenir-conducteur',conducteurController.getDevenirConducteur)
 
 /*GET Tunnel demande de trajet*/
 router.get('/demander-un-trajet/:trajetId/depart',trajetController.getDepart)

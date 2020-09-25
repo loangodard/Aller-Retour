@@ -1,12 +1,17 @@
-body {
-  font: 14px sans-serif;
-  padding: 10px;
-  margin: 0px;
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
 }
 
-a {
-  color: #00B7FF;
+
+body {
+  background-image: linear-gradient(45deg, #B3AADB, #B3AADB);
+	font-family: 'Muli', sans-serif;
+	min-height: 100vh;
+	margin: 0;
 }
+
 
 .user-message {
   margin: auto;
@@ -24,8 +29,62 @@ a {
   color: red;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .user-message {
     width: 30rem;
   }
+} */
+
+.nav-tag{
+  color:white;
+}
+
+.trajet-card{
+  background-color: #fff;
+	border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 20px;
+}
+
+.trajet-info {
+	padding: 30px;
+	width: 100%;
+}
+.trajet-card h6 {
+	opacity: 0.6;
+	margin: 0;
+  text-align: center;
+}
+
+.trajet-card h2 {
+  text-align: center;
+	margin: 10px 0;
+}
+
+.conduire{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 150px;
+  border: solid #4D3374;
+  color: #4D3374;
+  border-radius: 20px;
+}
+
+.conduire:hover{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: #4D3374;
+  border: solid #4D3374;
+  color: white;
+  border-radius: 20px;
+}
+
+.my-card{
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
 }

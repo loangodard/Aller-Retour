@@ -1,17 +1,35 @@
 <%-include('./includes/header.ejs')%>
+<link rel='stylesheet' href='/stylesheets/connexion.css' />
 </head>
 <%-include('./includes/navigation.ejs')%>
 
 <body>
-  <h1>Connexion</h1>
-  <% if (errorMessage) { %>
-  <div class="user-message user-message--error"><%= errorMessage %></div>
-  <% } %>
-  <form action='/connexion' method="POST">
-    <input type='text' name='email' placeholder="email" required>
-    <input type='password' name='password' placeholder="mot de passe" required>
-    <button type='submit'>Connexion</button>
-  </form>
+  <div class="container shadow" style="margin-top: 50px; max-width: 400px; width: 75%;">
+    <% if (errorMessage) { %>
+      <div class="user-message user-message--error"><%= errorMessage %></div>
+      <% } %>
+    <div class="header">
+      <img class="mx-auto d-block" src="images/logo_AR.png" width="150" height="150"/>
+      <h1 style="text-align: center;">Aller-Retour</h1>
+      <h3 style="text-align: center;">Connexion</h3>
+    </div>
+
+    <form action='/connexion' method="POST">
+      <div class="form-group">
+        <input class="form-control" style="max-width: 75%;margin: auto;"type='text' name='email' placeholder="Email" required>
+      </div>
+      <div class="from-group">
+        <input class="form-control" style="width: 75%;margin: auto;"type='password' name='password' placeholder="Mot de passe" required>
+      </div>
+      <div class="from-group" style="text-align: center;">
+        <button class="btn btn-success" style="margin: auto; margin-top: 20px;"type='submit'>Connexion</button>
+      </div>
+    </form>
+    <br>
+    <div style="text-align: center;">
+      <p>Pas encore de compte ? <a href="/inscription">Je m'inscris</a></p>
+    </div>
+  </div>
 </body>
 <%-include('./includes/footer.ejs')%>
 

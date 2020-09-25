@@ -1,0 +1,32 @@
+<%-include('./includes/header.ejs')%>
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+    <div class="container">
+        <h1>Devenir conducteur</h1>
+        <div class="my-card" style="padding:35px;">
+            <h5>Pourquoi faire ces démarches ?</h5>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Consequuntur distinctio enim nesciunt fugiat
+                molestiae consectetur ipsam. Fugit deserunt a neque soluta ipsum dolorum saepe numquam voluptatem,
+                vitae, obcaecati porro odio.</p>
+            <form method="POST" action="/conducteur/devenirConducteurVerification" enctype="multipart/form-data">
+                <ul>
+                    <li style="margin-bottom: 10px;">
+                        <h4>Vérifier le permis de conduire <%if(user.papiers.permis.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.permis.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
+                                vérification</span><%}else if(user.papiers.permis.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></h4>
+                        <input type="file" name="permis" <%if(user.papiers.permis.statut==='en cours de vérification' || user.papiers.permis.statut==="vérifié"){%> disabled <%}%>>
+                    </li>
+                    <li>
+                        <h4>Vérifier l'attestation d'assurance <%if(user.papiers.assurance.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.assurance.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
+                            vérification</span><%}else if(user.papiers.assurance.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></h4>
+                        <input type="file" name="assurance" <%if(user.papiers.assurance.statut==="en cours de vérification" || user.papiers.assurance.statut==="vérifié"){%> disabled <%}%>>
+                    </li>
+                </ul>
+                <button class="btn btn-info">Envoyer</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
