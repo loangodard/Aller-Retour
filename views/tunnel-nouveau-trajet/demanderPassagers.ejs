@@ -10,9 +10,13 @@
 
     <div class="row">
         <form method="post" action="/demander-passagers">
-            <input type="number" name='nombrePassagers' placeholder="Nombre de passagers" value="<%=trajet.nombrePassagers%>">
-            <input type='hidden' name="trajetId" value="<%=trajet._id%>">
-            <Button type='submit'>Suivant</Button>
+            <div class="vertical-align">
+                <input min="1" max="3" class="ask-passagers" type="number" name='nombrePassagers' placeholder="Nombre de passagers" value="<%=trajet.nombrePassagers%>">
+                <input type='hidden' name="trajetId" value="<%=trajet._id%>">
+                <div style="text-align: center;">
+                    <Button type='submit' class="suivant">Suivant</Button>
+                </div>
+            </div>
         </form>
     </div>
 

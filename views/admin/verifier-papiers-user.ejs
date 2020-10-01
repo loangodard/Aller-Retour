@@ -1,0 +1,88 @@
+<%-include('../includes/header.ejs')%>
+</head>
+<%-include('./includes/nav.ejs')%>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <div class="container">
+        <div class="my-card" style="padding:15px;margin-top: 30px;">
+            <h3 style="text-align: center;"><%=user.prenom%> <%=user.nom%></h3>
+            <h4 class="card-subtitle mb-2 text-muted" style="text-align: center;"><%=user._id%></h4>
+            <ul class="list-group">
+                <li class="list-group-item"><span style="font-weight: bold;">Permis de conduire</span>
+                    <br><%=user.papiers.permis.lien%><br> <%if(user.papiers.permis.statut === "non envoyé"){%><span
+                        class="badge badge-secondary">Non
+                        envoyé</span><%}else if(user.papiers.permis.statut==='en cours de vérification'){%> <span
+                        class="badge badge-warning">En cours de
+                        vérification</span><%}else if(user.papiers.permis.statut === "vérifié"){%> <span
+                        class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à
+                        renvoyer</span><%}%>
+                    <form method="POST" action="/admin/verifier-papier-user">
+                    <input type="hidden" name="userId" value="<%=user._id%>">
+                    <br>
+                    <div style="text-align: center;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="msgPermis">Document à renvoyer</label>
+                                    <textarea name="message-permis" id="msgPermis" style="width: 50%; margin: auto;"
+                                        class="form-control" placeholder="Message à l'utilisateur"
+                                        name="message-permis"></textarea>
+                                </div>
+                                <button name='bouton' value="renvoyer-permis" class="btn btn-danger">à renvoyer</button>
+                            </div>
+                            <div class="col">
+                                <button name='bouton' value="vérifié-permis" class="btn btn-success"
+                                    style="margin-top:30px;">vérifié</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                </form>
+                <li class="list-group-item">
+                    <span style="font-weight: bold;">Attestation d'assurance</span>
+                    <br><%=user.papiers.assurance.lien%><br>
+                    <%if(user.papiers.assurance.statut === "non envoyé"){%><span class="badge badge-secondary">Non
+                        envoyé</span><%}else if(user.papiers.assurance.statut==='en cours de vérification'){%> <span
+                        class="badge badge-warning">En cours de
+                        vérification</span><%}else if(user.papiers.assurance.statut === "vérifié"){%> <span
+                        class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à
+                        renvoyer</span><%}%>
+                <form method="POST" action="/admin/verifier-papier-user">
+                    <input type="hidden" name="userId" value="<%=user._id%>">
+                    <br>
+                    <div style="text-align: center;">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="msgAssurance">Document à renvoyer</label>
+                                    <textarea name='message-assurance' id="msgAssurance"
+                                        style="width: 50%; margin: auto;" class="form-control"
+                                        placeholder="Message à l'utilisateur" name="message-assurance"></textarea>
+                                </div>
+                                <button name='bouton' value="renvoyer-assurance" class="btn btn-danger">à
+                                    renvoyer</button>
+                            </div>
+                            <div class="col">
+                                <button name="bouton" value="vérifié-assurance" class="btn btn-success"
+                                    style="margin-top:30px;">vérifiée</button>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                </form>
+            </ul>
+            <%if(user.papiers.permis.statut === "vérifié" && user.papiers.assurance.statut === "vérifié"){%>
+                <div style="text-align: center;margin-top: 5px;">
+                    <form method="POST" action="/admin/promouvoir-conducteur">
+                        <input type="hidden" name="userId" value="<%=user._id%>">
+                        <button class="btn btn-info">Promouvoir Conducteur</button>
+                    </form>
+                </div>
+            <%}%>
+        </div>
+    </div>
+
+</body>
+
+</html>

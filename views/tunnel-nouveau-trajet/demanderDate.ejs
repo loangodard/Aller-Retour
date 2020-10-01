@@ -7,19 +7,22 @@
 
 <body>
 
+    <h1>Quand souhaitez vous partir ?</h1>
     <div class="container">
-        <h1>Quand souhaitez vous partir ?</h1>
         <form method="post" action="/demander-date">
-            <label>Date</label>
-            <input required class="form-control datepick" type="text" id="datepicker" name="date" autocomplete="off">
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="content"></div>
+            <% if (errorMessage) { %>
+                <div class="user-message user-message--error" style="margin-bottom: 20px;"><%= errorMessage %></div>
+                <% } %>
+
+            <div class="vertical-align" style="width: 100%;">
+                <input required class="form-control datepick ask-date" type="text" id="datepicker" name="date" autocomplete="off" placeholder="jj/mm/aaaa">
+                <div style="text-align: center;">
+                    <Button type='submit' class="btn suivant">Suivant</Button>
                 </div>
             </div>
 
             <input type='hidden' name="trajetId" value="<%=trajet._id%>">
-            <Button type='submit'>Suivant</Button>
+            
         </form>
     </div>
 

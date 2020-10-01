@@ -4,8 +4,16 @@ const Schema = mongoose.Schema;
 
 const trajetSchema = new Schema({
     passager:{type:String},
-    lieu_depart:{type:String},
-    lieu_arrivee:{type:String},
+    lieu_depart:{
+        ville:{type:String},
+        adresse:{type:String},
+        cp:{type:String}
+    },
+    lieu_arrivee:{
+        ville:{type:String},
+        adresse:{type:String},
+        cp:{type:String}
+    },
     date:{type:String},
     nombrePassagers:{type:Number},
     conducteur:{type:String},

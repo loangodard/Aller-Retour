@@ -16,11 +16,29 @@
                         <h4>Vérifier le permis de conduire <%if(user.papiers.permis.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.permis.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
                                 vérification</span><%}else if(user.papiers.permis.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></h4>
                         <input type="file" name="permis" <%if(user.papiers.permis.statut==='en cours de vérification' || user.papiers.permis.statut==="vérifié"){%> disabled <%}%>>
+
+                        <%if(user.papiers.permis.message!=='' && user.papiers.permis.statut=="à renvoyer"){%>
+                            <div class="alert alert-danger" style="margin-top:5px">
+                                Votre permis de conduire n'a pas été accepté pour la raison suivante :<br>
+                                <ul>
+                                    <li><%=user.papiers.permis.message%></li>
+                                </ul>
+                            </div>
+                        <%}%>
+
                     </li>
                     <li>
                         <h4>Vérifier l'attestation d'assurance <%if(user.papiers.assurance.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.assurance.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
                             vérification</span><%}else if(user.papiers.assurance.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></h4>
                         <input type="file" name="assurance" <%if(user.papiers.assurance.statut==="en cours de vérification" || user.papiers.assurance.statut==="vérifié"){%> disabled <%}%>>
+                        <%if(user.papiers.assurance.message!=='' && user.papiers.assurance.statut=="à renvoyer"){%>
+                            <div class="alert alert-danger" style="margin-top:5px">
+                                Votre attestation d'assurance n'a pas été acceptée pour la raison suivante :<br>
+                                <ul>
+                                    <li><%=user.papiers.assurance.message%></li>
+                                </ul>
+                            </div>
+                        <%}%>
                     </li>
                 </ul>
                 <button class="btn btn-info">Envoyer</button>

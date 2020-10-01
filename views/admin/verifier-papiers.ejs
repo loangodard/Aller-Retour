@@ -1,0 +1,38 @@
+<%-include('../includes/header.ejs')%>
+</head>
+<%-include('./includes/nav.ejs')%>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+  <div class="container">
+    <h1>Vérifier les papiers des conducteurs</h1>
+
+    <div class="list" style="overflow:scrolable;">
+      <%for(user of users){%>
+
+        <div class="card" style="margin-bottom: 10px;">
+          <div class="card-body">
+            <h4 class="card-title" style="text-align: center;"><%=user.prenom%> <%=user.nom%></h4>
+            <h5 class="card-subtitle mb-2 text-muted" style="text-align: center;"><%=user.rang%></h5>
+            <h6 class="mb-2 text-muted" style="text-align: center;"><%=user._id%></h6>
+            <ul class="list-group">
+              <li class="list-group-item"><span style="font-weight: bold;">Permis</span> <br><%=user.papiers.permis.lien%><br> <%if(user.papiers.permis.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.permis.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
+                vérification</span><%}else if(user.papiers.permis.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></li>
+              <li class="list-group-item"><span style="font-weight: bold;">Assurance</span> <br><%=user.papiers.assurance.lien%><br> <%if(user.papiers.assurance.statut === "non envoyé"){%><span class="badge badge-secondary">Non envoyé</span><%}else if(user.papiers.assurance.statut==='en cours de vérification'){%> <span class="badge badge-warning">En cours de
+                vérification</span><%}else if(user.papiers.assurance.statut === "vérifié"){%> <span class="badge badge-success">Vérifié</span><%}else{%> <span class="badge badge-danger">Document à renvoyer</span><%}%></li>
+            </ul>
+            <div style="text-align: center;margin-top: 5px;">
+              <a href="/admin/verifier-papiers/<%=user._id%>" class="btn btn-info">Vérifier</a>
+            </div>
+          </div>
+        </div>
+
+        <%}%>
+      </div>
+
+    
+
+  </div>
+</body>
+
+</html>
