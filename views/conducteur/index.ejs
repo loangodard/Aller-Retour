@@ -1,81 +1,31 @@
 <%-include('../includes/header.ejs')%>
-  </head>
-  <%-include('../includes/navigation.ejs')%>
-  <body>
-    <div class="container">
-      <h1>Espace Conducteur</h1>
-    </div>
+</head>
+<%-include('../includes/navigation.ejs')%>
 
-    <div class="row" style="padding-left: 10px;padding-right: 10px;">
-      <div class="col-md-4">
-        <div class="my-card rubrique" style="margin-bottom: 10px;">
-          <h4>Actualités</h4>
-        </div>
+<body>
+  <h1>Espace Conducteur</h1>
+
+  <div class="row" style="padding-left: 10px;padding-right: 10px; ">
+    <div class="col-lg-4">
+      <div class="my-card rubrique" style="margin-bottom: 10px;">
+        <h4>Actualités</h4>
       </div>
-      <div class="col-md-4">
-        <div class="my-card rubrique" style="margin-bottom: 10px;">
-          <h4>Les demandes de trajet</h4>
-          <div class="trajet-card">
-            <div class="trajet-info">
-              <!-- <div class="row">
-                  <img style="float:left" src="images/logo_ar.png" width="60" height="60"/>
-                  <div class="content-heading"><h3>Loan Godard</h3></div>
-              </div> -->
-      
-              <div class="wrapper" style="max-width: 400px;margin: auto;margin-bottom: 30px;">
-                <div class="col-12" style="display: flex;align-items: center;">
-                  <div class="col-3">
-                    <img class="rounded-circle" style="float:left" src="images/profil.jpg" width="80" height="80"/>
-                  </div>
-                  <div class="col-9">
-                    <div>
-                      <h2>Loan Godard</h2>
-                    </div>
-                  </div>
-                </div>
-              </div>
-      
-              <div class="row">
-                <div class="col-5">
-                  <h4 style="text-align: center;">Courtois-Sur-Yonne </h4>
-                </div>
-                <div class="col-2">
-                  <!-- <h2><i class="fas fa-car-side"></i></h2> -->
-                  <h4 style="text-align: center;">-</h4>
-                </div>
-                <div class="col-5">
-                  <h4 style="text-align: center;">Sens</h4>
-                </div>
-              </div>
-              <div class="row justify-content-center">
-                <div class="col-12">
-                  <table class="table table-borderless">
-                    <tbody>
-                      <tr>
-                        <td style="padding-left: 30px;"><i class="fas fa-car-side"></i> 38 rue des froments, 89100 Courtois-Sur-Yonne</td>
-                        <td><i class="fas fa-flag-checkered"></i> 61 boulevard du centenaire, 89100 Sens</td>
-                      </tr>
-                      <tr>
-                        <td style="padding-left: 30px;"><i class="far fa-calendar"></i> 13 septembre 2020 à 08:00</td>
-                        <td><i class="fas fa-male"></i> 2 passagers</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <div style="text-align: center;">
-                <button class="btn conduire">Conduire</button>
-              </div>
-            </div>
-      
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="my-card rubrique">
-          <h4>Mes actions</h4>
+    </div>
+    <div class="col-lg-4">
+      <div class="my-card rubrique" style="margin-bottom: 10px;">
+        <h4>Les demandes de trajet</h4>
+        <div style="overflow: auto;height: 500px;">
+          <%-include('../liste-trajets.ejs')%>
         </div>
       </div>
     </div>
-  </body>
+    <div class="col-lg-4">
+      <div class="my-card rubrique">
+        <h4>Mes actions</h4>
+      </div>
+    </div>
+  </div>
+
+</body>
+
 </html>

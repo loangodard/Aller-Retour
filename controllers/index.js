@@ -56,7 +56,7 @@ exports.getDemanderTrajet = (req, res, next) => {
 }
 
 exports.getVoirTrajets = (req, res, next) => {
-    Trajet.find().then(trajets => {
+    Trajet.find().populate('passager').then(trajets => {
         res.render('voirTrajets', {
             pageTitle: 'Les trajets',
             trajets: sortTrajet.sortTrajets(trajets),

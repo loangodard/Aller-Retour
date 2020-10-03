@@ -13,6 +13,7 @@ const User = require('./models/user');
 var indexRouter = require('./routes/index');
 var adminsRouter = require('./routes/admin');
 var conducteurRouter = require('./routes/conducteur')
+var commerceRouter = require('./routes/commerce')
 
 require('dotenv').config(); // ENV VARIABLE
 
@@ -62,6 +63,7 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/admin', adminsRouter);
 app.use('/conducteur',conducteurRouter)
+app.use('/commercant',commerceRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

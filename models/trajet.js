@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const trajetSchema = new Schema({
-    passager:{type:String},
+    passager:{type:String,ref:'User'},
     lieu_depart:{
         ville:{type:String},
         adresse:{type:String},

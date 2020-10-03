@@ -1,8 +1,15 @@
 const User = require('../models/user')
+const sortTrajet = require('../utils/sortTrajet')
+const Trajet = require('../models/trajet')
+const moment = require('moment')
 
 exports.getIndex = (req, res, next) => {
-    res.render('conducteur/index', {
-        pageTitle: "Espace conducteur"
+    Trajet.find().populate('passager').then(trajets => {
+        res.render('conducteur/index', {
+            pageTitle: 'Espace conducteur',
+            trajets: sortTrajet.sortTrajets(trajets),
+            moment: moment
+        });
     })
 }
 
