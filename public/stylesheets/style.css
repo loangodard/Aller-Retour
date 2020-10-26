@@ -6,14 +6,13 @@
 
 
 body {
-  background-image: linear-gradient(45deg, #B3AADB, #B3AADB);
+  background-color:#EEF2F7;
   font-family: 'Muli', sans-serif;
   min-height: 100vh;
   margin: 0;
 }
 
 h1 {
-  color: white;
   font-weight: bolder;
   font-size: 60px;
   margin-left: 15px;

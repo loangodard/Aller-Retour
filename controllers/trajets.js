@@ -24,6 +24,7 @@ exports.getDepart = (req, res, next) => {
             pageTitle: 'Départ',
             trajet: traj,
             GOOGLE_API_KEY: key
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }
@@ -51,6 +52,7 @@ exports.getArrivee = (req, res, next) => {
             pageTitle: 'Arrivée',
             trajet: traj,
             GOOGLE_API_KEY: key
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }
@@ -83,6 +85,7 @@ exports.getDate = (req, res, next) => {
             pageTitle: 'Date du départ',
             trajet: traj,
             errorMessage:message
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }
@@ -107,6 +110,7 @@ exports.getHeure = (req, res, next) => {
     res.render('tunnel-nouveau-trajet/demanderHeure.ejs', {
         pageTitle: 'Heure',
         trajetId: trajetId
+        ,isLoggedIn:req.session.isLoggedIn
     })
 }
 
@@ -130,6 +134,7 @@ exports.getPassagers = (req, res, next) => {
         res.render('tunnel-nouveau-trajet/demanderPassagers.ejs', {
             pageTitle: 'Nombre de passagers',
             trajet: traj
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }
@@ -153,6 +158,7 @@ exports.getConfirmer = (req, res, next) => {
         res.render('tunnel-nouveau-trajet/confirmer.ejs', {
             pageTitle: 'Confirmer ma demande',
             trajet: traj
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }
@@ -169,5 +175,6 @@ exports.postConfirmer = (req, res, next) => {
 exports.getDemandeRecue = (req, res, next) => {
     res.render('tunnel-nouveau-trajet/demandeRecue.ejs', {
         pageTitle: 'Demande reçue'
+        ,isLoggedIn:req.session.isLoggedIn
     })
 }

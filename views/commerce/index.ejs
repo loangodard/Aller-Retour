@@ -1,42 +1,98 @@
 <%-include('../includes/header.ejs')%>
+<link rel='stylesheet' href='/stylesheets/commerce.css' />
 </head>
 <%-include('../includes/navigation.ejs')%>
 
-<body>
-    <h1>Espace Commerçant</h1>
+<h1>Espace commerce</h1>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-    </button>
+<div class="container">
+    <div class="my-card" style="padding: 20px; margin-bottom: 20px;">
+        <h3 style="font-weight: bold;">Mon commerce</h3>
+        <%if(!commerce.nom){%>
+          Créez votre commerce dès maintenant.
+          <br>
+          <a href="/commercant/<%=commerce._id%>/creer-commerce">Créer mon commerce</a>
+        <%}else{%>
+          <div class="row justify-content-between">
+            <div class="col-12 col-md-9 col-lg-8">
+              <h4><%=commerce.nom%></h4>
+              <p><%=commerce.description%></p>
+              <h6>Adresse</h6>
+              <ul>
+                <li><%=commerce.lieu.adresse%></li>
+                <li><%=commerce.lieu.cp%></li>
+                <li><%=commerce.lieu.ville%></li>
+              </ul>
+              <p><%=commerce.horaires%></p>
+            </div>
+            <div class="col-12 col-md-3 col-lg-3">
+              <img src="<%=commerce.image%>" class="mx-auto d-block" style="max-width: 100%;">
+            </div>
+          </div>
+          <a href="/commercant/<%=commerce._id%>/modifier-commerce">Modifier mon commerce</a>
 
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+
+        <%}%>
+        <hr>
+        <h4>Mes produits</h4>
+        <%if(success){%>
+          <div class="alert alert-success"><%=success%></div>
+        <%}%>
+        <%if(error){%>
+          <div class="alert alert-danger"><%=error%></div>
+        <%}%>
+        <%if(produits.length >0){%>
+            <%var i = 0%>
+        <div class="products">
+            <%for(produit of produits){%>
+                <%i = i + 1%>
+            <div class="product-card">
+                <img class="product-img" src="<%=produit.image%>">
+                <h3><%=produit.titre%></h3>
+                <h5><%=produit.prix%>€ - <%=produit.quantite%> pcs</h5>
+                <div>
+                      <a class="btn" href="/commercant/<%=commerce._id%>/modifier-produit/<%=produit._id%>" style="color:rgb(0, 110, 255)">modifier</a>
+                      <button type="button" class="btn" style="color: red;" data-toggle="modal" data-target="#deleteModal-<%=i%>">supprimer</a>
                 </div>
             </div>
+
+            <div class="modal fade" id="deleteModal-<%=i%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Souhaitez-vous vraiment supprimer ce produit ?</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="product-card-modal">
+                            <img class="product-img" src="<%=produit.image%>">
+                            <h3><%=produit.titre%></h3>
+                            <h5><%=produit.prix%>€ - <%=produit.quantite%> pcs</h5>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                      <form method="POST" action="/commercant/supprimer-produit">
+                      <button class="btn btn-danger">Supprimer</button>
+                      <input type="hidden" name='productId' value="<%=produit._id %>">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <%}%>
+            </div>
+        <%}else{%>
+            <p>
+                Aucun produit pour le moment
+            </p>
+            <%}%>
+            <br>
+        <a href="/commercant/<%=commerce._id%>/ajouter-produit">ajouter un produit</a>
+
         </div>
     </div>
-
-</body>
-<script>
-    $('#exampleModal').on('shown.bs.modal', function () {
-        $('#myInput').trigger('focus')
-    })
-</script>
-
-</html>
+    </body>
+    </html>

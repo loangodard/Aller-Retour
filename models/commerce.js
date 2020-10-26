@@ -15,16 +15,17 @@ const commerceSchema = new Schema({
             type:String
         }
     },
-    Photo:{
+    image:{
+        type:String
+    },
+    nom:{
         type:String
     },
     description:{
         type:String
     },
-    horaires:[String],
-    produits:[{ type : ObjectId, ref: 'Produit' }]
-
-
+    horaires:{type:String},
+    produits:[{ type : String, ref: 'Produit' }]
 });
 
 module.exports = mongoose.model('Commerce', commerceSchema);

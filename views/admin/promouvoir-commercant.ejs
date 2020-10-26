@@ -1,0 +1,32 @@
+<%-include('../includes/header.ejs')%>
+</head>
+<%-include('./includes/nav.ejs')%>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <h1>Promouvoir Commerçant</h1>
+    <div class="container">
+        <div class="my-card" style="padding: 10px;">
+            <h3>Promouvoir un utilisateur au rang de commerçant</h3>
+            <p>En tant qu'administrateur, vous pouvez promouvoir n'importe quel utilisateur au rang de commerçant. Il
+                pourra alors créer des produits que les conducteurs pourront acheter avec les points qu'ils auront
+                gagnés.</p>
+                <%if(success){%>
+                    <div class="alert alert-success"><%=success%></div>
+                  <%}%>
+                  <%if(error){%>
+                    <div class="alert alert-danger"><%=error%></div>
+                  <%}%>
+
+            <form style="margin-top: 30px;" method="POST" action="/admin/promouvoir-commercant">
+                <label>Email de l'utilisateur</label>
+                <input name="mail" class="form-control" placeholder="Email de l'utilisateur à promouvoir">
+                <div style="text-align: center;">
+                    <button class="btn btn-success" style="margin-top: 10px;">Promouvoir Commerçant</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

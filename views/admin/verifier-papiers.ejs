@@ -8,8 +8,14 @@
     <h1>Vérifier les papiers des conducteurs</h1>
 
     <div class="list" style="overflow:scrolable;">
+      <%if(users.length <= 0){%>
+        <div class="card" style="margin-bottom: 10px;">
+          <div class="card-body">
+            <h4>Aucune demande actuellement...</h4>
+          </div>
+        </div>
+      <%}%>
       <%for(user of users){%>
-
         <div class="card" style="margin-bottom: 10px;">
           <div class="card-body">
             <h4 class="card-title" style="text-align: center;"><%=user.prenom%> <%=user.nom%></h4>

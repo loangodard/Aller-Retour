@@ -1,0 +1,165 @@
+<%-include('../includes/header.ejs')%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.0/croppie.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.0/croppie.min.js"></script>
+</head>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <div class="container">
+        <h1>Mon Commerce</h1>
+        <div class="my-card" style="padding: 30px;margin-bottom: 50px;">
+            <form enctype="multipart/form-data" method="POST" action="/commercant/modifier-commerce">
+                <div class="form-group">
+                    <h4>Nom et description</h4>
+                    <label>Nom du commerce</label>
+                    <input name="nom" class="form-control" placeholder="Nom du commerce" value="<%=commerce.nom%>" required>
+
+                    <label>Description du commerce</label>
+                    <textarea name="desc" class="form-control" placeholder="Description du commerce" required><%=commerce.description%></textarea>
+                </div>
+                <div class="form-group">
+                    <h4>Adresse</h4>
+                    <label>Numéro et voie</label>
+                    <input name='adresse' class="form-control" placeholder="N° et voie" value="<%=commerce.lieu.adresse%>" required>
+
+                    <label>Code Postal</label>
+                    <input name='cp' class="form-control" placeholder="Code postal" value="<%=commerce.lieu.cp%>" required>
+
+                    <label>Ville</label>
+                    <input name='ville' class="form-control" placeholder="Ville" value="<%=commerce.lieu.ville%>" required>
+                </div>
+                <div class="from-group">
+                    <h4>Informations pratiques</h4>
+                    <label>Horaires d'ouverture</label>
+                    <textarea name="horaires" class="form-control" placeholder="Ouvert du Lundi au Vendredi de 9h à 17h..." required><%=commerce.horaires%></textarea>
+                </div>
+                <div class="from-group">
+                    <label>Image (logo, boutique...)</label>
+                    <br>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Ajouter l'image de votre commerce
+                    </button>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ajouter une image</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="actions">
+                                        <a class="btn file-btn">
+                                            <input type="file" id="upload" value="Choose a file" accept="image/*"/>
+                                        </a>
+                                    </div>
+                                    <div class="upload-demo-wrap">
+                                        <div id="upload-demo"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success upload-result">Sauvegarder</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="result">
+                    <div id="row"><img src="<%=commerce.image%>" style="margin-top:10px;"></div>
+                </div>
+
+                <input value='<%=commerce.image%>' name="oldImage" type="hidden"/>
+
+
+                <div style="text-align: center;">
+                    <button class="btn btn-success" type="submit">Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function addRow(url) {
+        const div = document.createElement('div');
+
+        div.id = 'row';
+
+        div.innerHTML = `
+        <div>
+        <img src="` + url + `" style="margin-top:10px;">
+        <input value="`+url+`" type="hidden" name="imageBinary">
+        </div>
+  `;
+
+        document.getElementById('result').appendChild(div);
+    }
+
+    function removeRow() {
+        document.getElementById('result').removeChild(document.getElementById('row'));
+    }
+
+    var $uploadCrop$
+
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.upload-demo').addClass('ready');
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result
+                }).then(function () {
+                    console.log('jQuery bind complete');
+                });
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            console.log("Sorry - you're browser doesn't support the FileReader API");
+        }
+    }
+
+    $uploadCrop = $('#upload-demo').croppie({
+        url: "/images/default.jpg",
+        viewport: {
+            width: 300,
+            height: 300,
+            type: 'circle' 
+        },
+        boundary: {
+            width: 350,
+            height: 350
+        },
+        enableExif: true
+    });
+
+
+    $('#upload').on('change', function () {
+        readFile(this);
+    });
+
+    $('.upload-result').on('click', function (ev) {
+        $uploadCrop.croppie('result', {
+            type: 'base64'
+        }).then(function (resp) {
+            if(document.getElementById("result").childNodes.length == 0){
+                addRow(resp)
+            }else{
+                removeRow()
+                addRow(resp)
+            }
+            $('#exampleModal').modal('hide');
+        });
+    });
+</script>
+
+<%-include('../includes/footer.ejs')%>
+
+</html>

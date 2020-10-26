@@ -1,26 +1,31 @@
-<!-- <nav>
-    <a href="/"><h1>Aller-Retour</h1></a>
-    <ul>
-        <a href='/connexion'><li>Connexion</li></a>
-        <a href='/inscription'><li>Inscription</li></a>
-        <a href='/mon-compte'><li>Mon compte</li></a>
-        <a href='/paiement'><li>Paiement</li></a>
-        <a href='/trajets'><li>Les trajets demandés</li></a>
-        <a href='/demander-un-trajet'><li>Demander un trajet</li></a>
-    </ul>
-</nav> -->
-
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #FF5757;">
     <a class="navbar-brand" href="/">
         <img src="/images/logo_AR.png" width="50" height="50" class="align-center">
     </a>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-            <a style="color: white;" class="nav-item nav-link active" href="/trajets">Les trajets demandés</a>
-            <a style="color: white;" class="nav-item nav-link" href="#">Pricing</a>
-        </div>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="outline: none;">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a style="color: white;" class="nav-item nav-link active" href="/trajets">Les trajets demandés</a>
+            </li>
+            <li class="nav-item">
+                <a style="color: white;" class="nav-item nav-link" href="#">Pricing</a>
+            </li>
+          </ul>
+          <%if(!isLoggedIn){%>
+          <div class="form-inline my-2 my-lg-0">
+            <a href="/connexion"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Connexion</button></a>
+          </div>
+          <%}else if(typeof points !== 'undefined'){%>
+            <div style="text-align:center;background-color: white;border-radius: 6px; padding: 2px;font-weight: bold;width: 65px;">
+                <span><%=points%></span>
+                <img src="/images/devise.png" width="20" height="20" class="align-center">
+            </div>
+          <%}%>
     </div>
-
-    <a href="/connexion"><button class="btn btn-outline-light my-2 my-sm-0" type="submit">Connexion</button></a>
-
 </nav>

@@ -16,7 +16,7 @@ const trajetSchema = new Schema({
     },
     date:{type:String},
     nombrePassagers:{type:Number},
-    conducteur:{type:String},
+    conducteur:{type:String,ref:'User'},
     demandeConfirme:{type:Boolean}
 })
 

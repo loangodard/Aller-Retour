@@ -2,6 +2,9 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user')
 
 exports.getConnexion = (req, res, next) => {
+    if(req.session.isLoggedIn){
+        return res.redirect('/')
+    }
     let message = req.flash('error');
     if (message.length > 0) {
         message = message[0];
@@ -11,10 +14,14 @@ exports.getConnexion = (req, res, next) => {
     res.render('connexion', {
         pageTitle: 'Connexion',
         errorMessage: message
+        ,isLoggedIn:req.session.isLoggedIn
     });
 }
 
 exports.getInscription = (req, res, next) => {
+    if(req.session.isLoggedIn){
+        return res.redirect('/')
+    }
     let message = req.flash('error');
     if (message.length > 0) {
         message = message[0];
@@ -23,7 +30,8 @@ exports.getInscription = (req, res, next) => {
     }
     res.render('inscription', {
         pageTitle: 'inscription',
-        errorMessage: message
+        errorMessage: message,
+        isLoggedIn:req.session.isLoggedIn
     });
 }
 
@@ -52,6 +60,7 @@ exports.postConnexion = (req, res, next) => {
                 })
                 .catch(err => {
                     console.log(err);
+                    req.flash('error', 'Email ou mot de passe invalide');
                     res.redirect('/connexion');
                 });
         })
@@ -95,6 +104,10 @@ exports.postInscription = (req, res, next) => {
                                 statut:'non envoyé',
                                 lien:''
                             }
+                        },
+                        points:{
+                            achetes:0,
+                            gagnes:0
                         }
                     });
                     return user.save();

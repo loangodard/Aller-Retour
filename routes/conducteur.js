@@ -4,6 +4,7 @@ const conducteurControllers = require('../controllers/conducteur')
 var aws = require('aws-sdk')
 var multer = require('multer')
 var multerS3 = require('multer-s3')
+const isConducteur = require('../middleware/is-conducteur')
 
 require('dotenv').config(); // ENV VARIABLE
 
@@ -31,7 +32,7 @@ var upload = multer({
 })
 
 /* GET users listing. */
-router.get('/', conducteurControllers.getIndex);
+router.get('/',isConducteur, conducteurControllers.getIndex);
 
 
 /* POST */

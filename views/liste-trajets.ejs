@@ -44,8 +44,83 @@
             </div>
           </div>
           <div style="text-align: center;">
-            <button class="btn conduire">Conduire</button>
+          <%if(user._id.toString() !== trajet.passager._id.toString()){%>
+          <button class="btn conduire"
+            data-toggle="modal"
+            data-target="#exampleModal"
+            data-trajet='<%=trajet.lieu_depart.ville%>-<%=trajet.lieu_arrivee.ville%>'
+            data-depart='<%=trajet.lieu_depart.adresse%>, <%=trajet.lieu_depart.cp%> <%=trajet.lieu_depart.ville%>'
+            data-arrivee='<%=trajet.lieu_arrivee.adresse%>, <%=trajet.lieu_arrivee.cp%> <%=trajet.lieu_arrivee.ville%>' 
+            data-date="<%=moment(trajet.date, 'DD/MM/YYYY hh').format('dddd DD MMMM yyyy à hh:mm')%>" 
+            data-passager="<%=trajet.nombrePassagers%><%if(trajet.nombrePassagers > 1){%> passagers<%}else{%> passager<%}%>"
+            data-trajetid="<%=trajet._id%>"
+          >
+            Conduire
+          </button>
+          <%}%>
           </div>
         </div>
     </div>
 <%}%>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h2 class='ville'>test</h1>
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding-left: 30px;"><i class="fas fa-car-side"></i>
+                                          <span class='depart'>depart</span></td>
+                                        <td><i class="fas fa-flag-checkered"></i> <span class='arrivee'>arrivée</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left: 30px;"><i class="far fa-calendar"></i> <span class='date'>date</span></td>
+                                        <td><i class="fas fa-male"></i> <span class="passager">passager</span></td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                      <form action="/conduire" method="POST">
+                        <input type="hidden" name="trajetId" class='trajetId'>
+                        <button type="submit" class="btn conduire">Conduire</button>
+                      </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+  var button = $(event.relatedTarget) // Button that triggered the modal
+  var trajet = button.data('trajet') // Extract info from data-* attributes
+  var depart = button.data('depart')
+  var arrivee = button.data('arrivee')
+  var date = button.data('date')
+  var passager = button.data('passager')
+  var trajetId = button.data('trajetid')
+ 
+  var modal = $(this)
+  modal.find('.modal-title').text('Loan Godard')
+  modal.find('.ville').text(trajet)
+  modal.find('.depart').text(depart)
+  modal.find('.arrivee').text(arrivee)
+  modal.find('.date').text(date)
+  modal.find('.passager').text(passager)
+  modal.find('.trajetId').val(trajetId)
+})
+</script>
+

@@ -1,0 +1,158 @@
+<%-include('../includes/header.ejs')%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.0/croppie.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.0/croppie.min.js"></script>
+</head>
+<%-include('../includes/navigation.ejs')%>
+
+<body>
+    <div class="container">
+        <h1>Modifier le produit</h1>
+        <div class="my-card" style="padding: 30px;margin-bottom: 50px;">
+            <form enctype="multipart/form-data" method="POST" action="/commercant/modifier-produit">
+                <div class="form-group">
+                    <label>Titre du produit</label>
+                    <input name="titre" class="form-control" placeholder="Titre du produit" value="<%=produit.titre%>" required>
+                </div>
+                <div class="form-group">
+                    <label>Description du produit</label>
+                    <textarea name="desc" class="form-control" placeholder="Description du produit" required><%=produit.description%></textarea>
+                </div>
+                <div class="from-group">
+                    <label>Quantité disponible</label>
+                    <input name="qte" type="number" min=0 class="form-control" placeholder="Quantité" value="<%=produit.quantite%>" required>
+                </div>
+                <div class="from-group">
+                    <label>Prix (ce que vous souhaitez gagner en euros)</label>
+                    <input name="prix" type="number" min=0 class="form-control" placeholder="Prix" value="<%=produit.prix%>" required>
+                </div>
+                <div class="from-group">
+                    <label>Image</label>
+                    <br>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Modifier l'image du produit
+                    </button>
+                </div>
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modifier l'image du produit</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="actions">
+                                        <a class="btn file-btn">
+                                            <input type="file" id="upload" value="Choose a file" accept="image/*"/>
+                                        </a>
+                                    </div>
+                                    <div class="upload-demo-wrap">
+                                        <div id="upload-demo"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success upload-result">Valider</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="result">
+                    <div id="row"><img src="<%=produit.image%>" style="margin-top:10px;"></div>
+                </div>
+
+
+                <input value='<%=produit.image%>' name="oldImage" type="hidden"/>
+                <input value='<%=produit._id%>' name="productId" type="hidden"/> 
+
+                <div style="text-align: center;">
+                    <button class="btn btn-success" type="submit">Sauvegarder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<script>
+    function addRow(url) {
+        const div = document.createElement('div');
+
+        div.id = 'row';
+
+        div.innerHTML = `
+        <div>
+        <img src="` + url + `" style="margin-top:10px;">
+        <input value="`+url+`" type="hidden" name="imageBinary">
+        </div>
+  `;
+
+        document.getElementById('result').appendChild(div);
+    }
+
+    function removeRow() {
+        document.getElementById('result').removeChild(document.getElementById('row'));
+    }
+
+
+    var $uploadCrop$
+
+    function readFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.upload-demo').addClass('ready');
+                $uploadCrop.croppie('bind', {
+                    url: e.target.result
+                }).then(function () {
+                    console.log('jQuery bind complete');
+                });
+
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        } else {
+            console.log("Sorry - you're browser doesn't support the FileReader API");
+        }
+    }
+
+    $uploadCrop = $('#upload-demo').croppie({
+        url: "/images/default.jpg",
+        viewport: {
+            width: 300,
+            height: 300,
+        },
+        boundary: {
+            width: 350,
+            height: 350
+        },
+        enableExif: true
+    });
+
+
+    $('#upload').on('change', function () {
+        readFile(this);
+    });
+
+    $('.upload-result').on('click', function (ev) {
+        $uploadCrop.croppie('result', {
+            type: 'base64'
+        }).then(function (resp) {
+            if(document.getElementById("result").childNodes.length == 0){
+                addRow(resp)
+            }else{
+                removeRow()
+                addRow(resp)
+            }
+            $('#exampleModal').modal('hide');
+        });
+    });
+</script>
+
+<%-include('../includes/footer.ejs')%>
+
+</html>

@@ -8,7 +8,9 @@ exports.getIndex = (req, res, next) => {
         res.render('conducteur/index', {
             pageTitle: 'Espace conducteur',
             trajets: sortTrajet.sortTrajets(trajets),
-            moment: moment
+            moment: moment,
+            user:req.session.user
+            ,isLoggedIn:req.session.isLoggedIn
         });
     })
 }
@@ -18,6 +20,7 @@ exports.getDevenirConducteur = (req, res, next) => {
         res.render('devenirConducteur', {
             pageTitle: "Devenir Conducteur",
             user:user
+            ,isLoggedIn:req.session.isLoggedIn
         })
     })
 }

@@ -51,14 +51,22 @@ const userSchema = new Schema({
       }
     }
   },
+  points: {
+    achetes: {
+      type: Number
+    },
+    gagnes: {
+      type: Number
+    }
+  },
+  commerceId: {
+    type: String,
+    ref:'Commerce'
+  }
 });
 
-
-// userSchema.methods.clearCart = function () {
-//   this.cart = {
-//     items: []
-//   };
-//   return this.save();
-// };
+userSchema.methods.getPoints = function (cb) {
+  cb(this.points.achetes + this.points.gagnes)
+};
 
 module.exports = mongoose.model('User', userSchema);
