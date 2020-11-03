@@ -1,0 +1,119 @@
+<%-include('./includes/header.ejs')%>
+<link rel='stylesheet' href='/stylesheets/acheter-points.css' />
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+    <canvas id="my-canvas"></canvas>
+    <div class="container">
+        <div class="my-card mx-auto d-block" style="width: 100%;max-width: 600px;border-radius: 1rem;margin-top: 50px;">
+            <div class="row">
+                <div class="col-12 col-md-5 col-lg-6 pricing">
+                    <div class="card mb-5 mb-lg-0" style="pointer-events:none; height: 100%; width: 100%;">
+                        <div class="card-body">
+                            <h5 class="card-title text-top text-uppercase text-center"><%=amount/100%>€</h5>
+                            <h6 class="card-price text-center"><%=amount%><img src="/images/devise.png" width="50" height="50"
+                                    class="align-center"></h6>
+                            <hr>
+                            <%if(amount == 500){%>
+                                <img class="illu mx-auto d-block" src="/images/pack/3.png">
+                                <%}%>
+                            <%if(amount == 1000){%>
+                            <img class="illu mx-auto d-block" src="/images/pack/2.png">
+                            <%}%>
+                            <%if(amount == 2000){%>
+                                <img class="illu mx-auto d-block" src="/images/pack/1.png">
+                                <%}%>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-7 col-lg-6" style="padding-top: 20px;padding-bottom: 20px;text-align:center;">
+                    <div style="text-align: center;">
+                        <h3>Acheter des points</h3>
+                    </div>
+                    <h5>Prix : <%=amount/100%>€</h5>
+                    <form>
+                        <label for='card-element'>Information de la carte</label>
+                        <div id="card-element"></div>
+                        <div id="card-errors" role="alert"></div>
+                        <div id="card-success" role="alert"></div>
+                        <button style="margin-top: 10px;" class="btn btn-success" type="submit"
+                            id="submit">Acheter</button>
+                            <br>
+                        <div style="text-align: center;">
+                            <a href="/" class='btn btn-info' id='back' style="display: none;width: 75%;">Revenir au menu</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="/javascripts/confetti-js-master/dist/index.min.js"></script>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var confettiSettings = {
+        target: 'my-canvas'
+    };
+    var confetti = new ConfettiGenerator(confettiSettings);
+    
+    const stripe = Stripe('<%=stripe_public_key%>')
+    const elements = stripe.elements()
+    const card = elements.create('card')
+    const displayError = document.querySelector('#card-errors')
+    const displaySuccess = document.querySelector('#card-success')
+    const form = document.querySelector('form')
+    const submitButton = document.querySelector('#submit')
+
+    const back = document.getElementById("back");
+
+    card.mount('#card-element')
+    card.addEventListener('change', (error) => {
+        if (error) {
+            displayError.textContent = error.message
+        } else {
+            displayError.textContent = ''
+        }
+    })
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        if (!submitButton.hasAttribute('disabled')) {
+            submitButton.setAttribute('disabled', true)
+
+            const result = await stripe.confirmCardPayment('<%=client_secret%>', {
+                payment_method: {
+                    card,
+                    billing_details: {
+                        email: '<%=userMail%>'
+                    }
+                }
+            })
+
+            if (result.error) {
+                displayError.textContent = result.error.message
+            } else {
+                if (result.paymentIntent.status === "succeeded") {
+                    displaySuccess.textContent = 'Paiement accepté, merci pour la confiance que vous nous accordez.'
+                    form.reset()
+                    card.clear()
+                    $.ajax({
+                        url: '/acheter-points/<%=amount%>/success',
+                        type: 'POST',
+                        cache: false,
+                        data: {
+                            amount: '<%=amount%>',
+                            userId: '<%=userId%>'
+                        }
+                    })
+                    confetti.render({respawn:false});
+                    back.style.display = "block";
+                    submitButton.style.display = "none";
+                }
+            }
+        }
+    })
+</script>

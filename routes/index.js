@@ -27,6 +27,8 @@ router.get('/demander-un-trajet/:trajetId/heure',isAuth,trajetController.getHeur
 router.get('/demander-un-trajet/:trajetId/passagers',isAuth,trajetController.getPassagers)
 router.get('/demander-un-trajet/:trajetId/confirmer',isAuth,trajetController.getConfirmer)
 router.get('/demander-un-trajet/:trajetId/demande-recue',isAuth,trajetController.getDemandeRecue)
+router.get('/acheter-points',isAuth,indexController.getAcheterPoints)
+router.get('/acheter-points/:amount',isAuth,indexController.getAchatPoints)
 
 
 /* POST */
@@ -35,6 +37,7 @@ router.post('/connexion',authController.postConnexion)
 router.post('/deconnexion',isAuth,authController.postLogout)
 router.post('/conduire',isAuth,isConducteur,indexController.postConduire)
 router.post('/modifier-compte',isAuth,indexController.postModifierCompte)
+router.post('/acheter-points/:amount/success',isAuth,indexController.postCheckoutSuccess)
 
 /*POST Tunnel demande de trajet*/
 router.post('/demander-un-trajet',isAuth,trajetController.postDemanderTrajet)

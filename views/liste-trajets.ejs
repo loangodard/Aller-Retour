@@ -1,43 +1,49 @@
 <%moment.locale('fr')%>
 <%for (trajet of trajets){%>
-    <div class="trajet-card">
-        <div class="trajet-info">  
-          <div class="wrapper" style="max-width: 400px;margin: auto;margin-bottom: 30px;">
-            <div class="col-12" style="display: flex;align-items: center;">
-              <div class="col-3">
-                <img class="rounded-circle" style="float:left" src="images/profil.jpg" width="80" height="80"/>
-              </div>
-              <div class="col-9">
-                <div>
-                  <h2><%=trajet.passager.prenom%> <%=trajet.passager.nom%></h2>
-                </div>
-              </div>
+<div class="trajet-card">
+  <div class="trajet-info">
+    <div class="wrapper" style="max-width: 400px;margin: auto;margin-bottom: 30px;">
+      <div class="col-12" style="display: flex;align-items: center;">
+        <div class="row" style="margin-right: auto;margin-left: auto;">
+          <div class="col-12">
+            <img class="rounded-circle mx-auto d-block" src="/images/profil.jpg" width="80" height="80" />
+          </div>
+          <div class="col-12">
+            <div>
+              <h2><%=trajet.passager.prenom%> <%=trajet.passager.nom%></h2>
             </div>
           </div>
-  
-          <div class="row">
-            <div class="col-5">
-              <h4 style="text-align: center;"><%=trajet.lieu_depart.ville%></h4>
-            </div>
-            <div class="col-2">
-              <!-- <h2><i class="fas fa-car-side"></i></h2> -->
-              <h4 style="text-align: center;">-</h4>
-            </div>
-            <div class="col-5">
-              <h4 style="text-align: center;"><%=trajet.lieu_arrivee.ville%></h4>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-12">
-              <table class="table table-borderless">
-                <tbody>
-                  <tr>
-                    <td style="padding-left: 30px;"><i class="fas fa-car-side"></i> <%=trajet.lieu_depart.adresse%>, <%=trajet.lieu_depart.cp%> <%=trajet.lieu_depart.ville%></td>
-                    <td><i class="fas fa-flag-checkered"></i> <%=trajet.lieu_arrivee.adresse%>, <%=trajet.lieu_arrivee.cp%> <%=trajet.lieu_arrivee.ville%></td>
-                  </tr>
-                  <tr>
-                    <td style="padding-left: 30px;"><i class="far fa-calendar"></i> <%= moment(trajet.date, "DD/MM/YYYY hh").format('dddd DD MMMM yyyy à hh:mm') %></td>
-                    <td><i class="fas fa-male"></i> <%=trajet.nombrePassagers%><%if(trajet.nombrePassagers > 1){%> passagers<%}else{%> passager<%}%></td>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-5">
+        <h4 style="text-align: center;"><%=trajet.lieu_depart.ville%></h4>
+      </div>
+      <div class="col-2">
+        <!-- <h2><i class="fas fa-car-side"></i></h2> -->
+        <h4 style="text-align: center;">-</h4>
+      </div>
+      <div class="col-5">
+        <h4 style="text-align: center;"><%=trajet.lieu_arrivee.ville%></h4>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td style="padding-left: 30px;"><i class="fas fa-car-side"></i> <%=trajet.lieu_depart.adresse%>,
+                <%=trajet.lieu_depart.cp%> <%=trajet.lieu_depart.ville%></td>
+              <td><i class="fas fa-flag-checkered"></i> <%=trajet.lieu_arrivee.adresse%>, <%=trajet.lieu_arrivee.cp%>
+                <%=trajet.lieu_arrivee.ville%></td>
+            </tr>
+            <tr>
+              <td style="padding-left: 30px;"><i class="far fa-calendar"></i>
+                <%= moment(trajet.date, "DD/MM/YYYY hh").format('dddd DD MMMM yyyy à hh:mm') %></td>
+              <td><i class="fas fa-male"></i> <%=trajet.nombrePassagers%><%if(trajet.nombrePassagers > 1){%>
+                passagers<%}else{%> passager<%}%></td>
                   </tr>
                 </tbody>
               </table>
@@ -45,82 +51,81 @@
           </div>
           <div style="text-align: center;">
           <%if(user._id.toString() !== trajet.passager._id.toString()){%>
-          <button class="btn conduire"
-            data-toggle="modal"
-            data-target="#exampleModal"
-            data-trajet='<%=trajet.lieu_depart.ville%>-<%=trajet.lieu_arrivee.ville%>'
-            data-depart='<%=trajet.lieu_depart.adresse%>, <%=trajet.lieu_depart.cp%> <%=trajet.lieu_depart.ville%>'
-            data-arrivee='<%=trajet.lieu_arrivee.adresse%>, <%=trajet.lieu_arrivee.cp%> <%=trajet.lieu_arrivee.ville%>' 
-            data-date="<%=moment(trajet.date, 'DD/MM/YYYY hh').format('dddd DD MMMM yyyy à hh:mm')%>" 
-            data-passager="<%=trajet.nombrePassagers%><%if(trajet.nombrePassagers > 1){%> passagers<%}else{%> passager<%}%>"
-            data-trajetid="<%=trajet._id%>"
-          >
-            Conduire
-          </button>
-          <%}%>
+                <button class="btn conduire" data-toggle="modal" data-target="#exampleModal"
+                  data-trajet='<%=trajet.lieu_depart.ville%>-<%=trajet.lieu_arrivee.ville%>'
+                  data-depart='<%=trajet.lieu_depart.adresse%>, <%=trajet.lieu_depart.cp%> <%=trajet.lieu_depart.ville%>'
+                  data-arrivee='<%=trajet.lieu_arrivee.adresse%>, <%=trajet.lieu_arrivee.cp%> <%=trajet.lieu_arrivee.ville%>'
+                  data-date="<%=moment(trajet.date, 'DD/MM/YYYY hh').format('dddd DD MMMM yyyy à hh:mm')%>"
+                  data-passager="<%=trajet.nombrePassagers%><%if(trajet.nombrePassagers > 1){%> passagers<%}else{%> passager<%}%>"
+            data-trajetid="<%=trajet._id%>">
+                  Conduire - 300<img src="/images/devise.png" width="20" height="20" class="align-center">
+                </button>
+                <%}%>
           </div>
         </div>
     </div>
 <%}%>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <h2 class='ville'>test</h1>
-                    <div class="row justify-content-center">
-                        <div class="col-12">
-                            <table class="table table-borderless">
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <h2 class='ville'>test</h1>
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              <table class="table table-borderless">
                                 <tbody>
-                                    <tr>
-                                        <td style="padding-left: 30px;"><i class="fas fa-car-side"></i>
-                                          <span class='depart'>depart</span></td>
-                                        <td><i class="fas fa-flag-checkered"></i> <span class='arrivee'>arrivée</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td style="padding-left: 30px;"><i class="far fa-calendar"></i> <span class='date'>date</span></td>
-                                        <td><i class="fas fa-male"></i> <span class="passager">passager</span></td>
-                                        </tr>
+                                  <tr>
+                                    <td style="padding-left: 30px;"><i class="fas fa-car-side"></i>
+                                      <span class='depart'>depart</span>
+                                    </td>
+                                    <td><i class="fas fa-flag-checkered"></i> <span class='arrivee'>arrivée</span></td>
+                                  </tr>
+                                  <tr>
+                                    <td style="padding-left: 30px;"><i class="far fa-calendar"></i> <span
+                                        class='date'>date</span></td>
+                                    <td><i class="fas fa-male"></i> <span class="passager">passager</span></td>
+                                  </tr>
                                 </tbody>
-                            </table>
-                        </div>
+                              </table>
+                            </div>
+                          </div>
+                          <div style="text-align: center;">
+                            <form action="/conduire" method="POST">
+                              <input type="hidden" name="trajetId" class='trajetId'>
+                              <button type="submit" class="btn conduire">Conduire - 300<img src="/images/devise.png"
+                                  width="20" height="20" class="align-center"></button>
+                            </form>
+                          </div>
+                      </div>
                     </div>
-                    <div style="text-align: center;">
-                      <form action="/conduire" method="POST">
-                        <input type="hidden" name="trajetId" class='trajetId'>
-                        <button type="submit" class="btn conduire">Conduire</button>
-                      </form>
-                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
-        </div>
 
-<script>
-    $('#exampleModal').on('show.bs.modal', function (event) {
-  var button = $(event.relatedTarget) // Button that triggered the modal
-  var trajet = button.data('trajet') // Extract info from data-* attributes
-  var depart = button.data('depart')
-  var arrivee = button.data('arrivee')
-  var date = button.data('date')
-  var passager = button.data('passager')
-  var trajetId = button.data('trajetid')
- 
-  var modal = $(this)
-  modal.find('.modal-title').text('Loan Godard')
-  modal.find('.ville').text(trajet)
-  modal.find('.depart').text(depart)
-  modal.find('.arrivee').text(arrivee)
-  modal.find('.date').text(date)
-  modal.find('.passager').text(passager)
-  modal.find('.trajetId').val(trajetId)
-})
-</script>
+                <script>
+                  $('#exampleModal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var trajet = button.data('trajet') // Extract info from data-* attributes
+                    var depart = button.data('depart')
+                    var arrivee = button.data('arrivee')
+                    var date = button.data('date')
+                    var passager = button.data('passager')
+                    var trajetId = button.data('trajetid')
 
+                    var modal = $(this)
+                    modal.find('.modal-title').text('Loan Godard')
+                    modal.find('.ville').text(trajet)
+                    modal.find('.depart').text(depart)
+                    modal.find('.arrivee').text(arrivee)
+                    modal.find('.date').text(date)
+                    modal.find('.passager').text(passager)
+                    modal.find('.trajetId').val(trajetId)
+                  })
+                </script>

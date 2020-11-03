@@ -5,6 +5,8 @@ var aws = require('aws-sdk')
 var multer = require('multer')
 var multerS3 = require('multer-s3')
 const isConducteur = require('../middleware/is-conducteur')
+const isConducteurOfThisTrajet = require('../middleware/is-conducteur-of-this-trajet')
+const isAuth = require('../middleware/is-auth')
 
 require('dotenv').config(); // ENV VARIABLE
 
@@ -31,9 +33,9 @@ var upload = multer({
   })
 })
 
-/* GET users listing. */
-router.get('/',isConducteur, conducteurControllers.getIndex);
-
+/* GET */
+router.get('/',isAuth,isConducteur, conducteurControllers.getIndex);
+router.get('/confirmation-trajet/:trajetId',isAuth,isConducteur,isConducteurOfThisTrajet,conducteurControllers.getConfirmationTrajet)
 
 /* POST */
 router.post('/devenirConducteurVerification', upload.fields([{name: 'permis'},{name: 'assurance'}]), conducteurControllers.postVerifierPapiers)

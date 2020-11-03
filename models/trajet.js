@@ -17,7 +17,9 @@ const trajetSchema = new Schema({
     date:{type:String},
     nombrePassagers:{type:Number},
     conducteur:{type:String,ref:'User'},
-    demandeConfirme:{type:Boolean}
+    demandeConfirme:{type:Boolean},
+    codeConfirmation:{type:String},
+    trajetConfirme:{type:Boolean} 
 })
 
 module.exports = mongoose.model('Trajet', trajetSchema);

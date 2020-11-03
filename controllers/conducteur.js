@@ -4,7 +4,7 @@ const Trajet = require('../models/trajet')
 const moment = require('moment')
 
 exports.getIndex = (req, res, next) => {
-    Trajet.find().populate('passager').then(trajets => {
+    Trajet.find({conducteur:req.session.user._id}).populate('passager').then(trajets => {
         res.render('conducteur/index', {
             pageTitle: 'Espace conducteur',
             trajets: sortTrajet.sortTrajets(trajets),
@@ -41,5 +41,18 @@ exports.postVerifierPapiers = (req, res, next) => {
 
         user.save()
         res.redirect('/devenir-conducteur')
+    })
+}
+
+exports.getConfirmationTrajet = (req,res,next) => {
+    const trajetId = req.params.trajetId
+    Trajet.findById(trajetId).populate('passager').then(trajet => {
+        console.log(trajet)
+        res.render('conducteur/confirmation-trajet.ejs',{
+            pageTitle:'Trajet confirmé',
+            isLoggedIn:req.session.isLoggedIn,
+            trajet:trajet,
+            moment:moment
+        })
     })
 }

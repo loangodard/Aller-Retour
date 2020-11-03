@@ -1,6 +1,13 @@
 module.exports = (req,res,next) => {
-    if(req.session.user.rang !== 'commerce'){
-        return res.redirect('/')
-    }
-    next()
+    User.findById(req.session.user._id).then(user=>{
+        if(user.rang == 'commerce'){
+            if(req.session.user.rang !== 'commerce'){
+                req.session.user.rang = 'commerce'
+                req.session.save()
+            }
+            return next()
+        }else{
+            res.redirect('/')
+        }
+    })
 }

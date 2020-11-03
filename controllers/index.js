@@ -1,14 +1,21 @@
 const User = require('../models/user')
 const Trajet = require('../models/trajet')
 const moment = require('moment');
+
+const randomId = require('../utils/randomId')
 const sortTrajet = require('../utils/sortTrajet')
+
+require('dotenv').config(); // ENV VARIABLE
+
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY)
+console.log()
 
 
 exports.getIndex = (req, res, next) => {
     res.render('index', {
         pageTitle: 'Aller-Retour',
         isLoggedIn: req.session.isLoggedIn,
-        points : req.session.user.points.gagnes + req.session.user.points.achetes
+        points: req.session.user.points.gagnes + req.session.user.points.achetes
     });
 }
 
@@ -78,7 +85,6 @@ exports.getDemanderTrajet = (req, res, next) => {
 
 exports.getVoirTrajets = (req, res, next) => {
     Trajet.find().populate('passager').then(trajets => {
-        console.log(trajets)
         res.render('voirTrajets', {
             pageTitle: 'Les trajets',
             trajets: sortTrajet.sortTrajets(trajets),
@@ -91,11 +97,60 @@ exports.getVoirTrajets = (req, res, next) => {
 
 exports.postConduire = (req, res, next) => {
     const conducteurId = req.session.user._id
+    const codeConfirmation = randomId.makeid(5)
     const trajetId = req.body.trajetId
     Trajet.findById(trajetId).then(traj => {
         traj.conducteur = conducteurId
+        traj.codeConfirmation = codeConfirmation
+        traj.trajetConfirme = false
         traj.save()
     }).then(r => {
-        res.redirect('/')
+        res.redirect('/conducteur/confirmation-trajet/'+trajetId)
     })
+}
+
+exports.getAcheterPoints = (req, res, next) => {
+    res.render('acheter-points', {
+        pageTitle: 'Acheter des points',
+        isLoggedIn: req.session.isLoggedIn
+    })
+}
+
+exports.getAchatPoints = async (req, res, next) => {
+    const amount = Number(req.params.amount)
+    console.log(amount)
+    if ([500, 1000, 2000].includes(amount)) {
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: amount,
+            currency: 'eur',
+            description: amount + ' points Aller-Retour',
+            statement_descriptor: amount + ' points'
+        })
+        res.render('page-achat', {
+            userMail: req.session.user.email,
+            client_secret: paymentIntent.client_secret,
+            stripe_public_key: process.env.STRIPE_PUBLIC_KEY,
+            pageTitle: 'Acheter des points',
+            isLoggedIn: req.session.isLoggedIn,
+            amount: amount,
+            userId: req.session.user._id
+        })
+    } else {
+        res.redirect('/acheter-points')
+    }
+}
+
+exports.postCheckoutSuccess = (req, res, next) => {
+    const amount = Number(req.body.amount)
+    const userId = req.body.userId
+    User.findById(userId).then(user => {
+        var newAmount = Number(user.points.achetes)
+        newAmount += amount
+        user.points.achetes = newAmount
+        user.save()
+        req.session.user = user
+        req.session.save()
+        res.redirect('/');
+    })
+
 }

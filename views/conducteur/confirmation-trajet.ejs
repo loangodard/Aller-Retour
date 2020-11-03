@@ -1,0 +1,15 @@
+<%-include('../includes/header.ejs')%>
+  </head>
+  <%-include('../includes/navigation.ejs')%>
+  <body>
+    <h1>Votre trajet avec <%=trajet.passager.prenom%></h1>
+    <div class="container">
+        <div class="my-card" style="padding: 30px;">
+            <h2>Confirmez le trajet avec <%=trajet.passager.prenom%></h2>
+            <p>Prennez contact par téléphone avec <%=trajet.passager.prenom%> pour confirmer le trajet.</p>
+            <b>Téléphone : <a href='tel:<%=trajet.passager.tel%>'><%=trajet.passager.tel%></a></b>
+            <%-include('../trajet-card.ejs')%>
+        </div>
+    </div>
+  </body>
+</html>

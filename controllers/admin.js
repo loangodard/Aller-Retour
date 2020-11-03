@@ -1,5 +1,7 @@
 const User = require('../models/user')
 const Commerce = require('../models/commerce')
+const user = require('../models/user')
+const mongoose = require('mongoose')
 
 exports.getIndex = (req, res, next) => {
     res.render('admin/index', {

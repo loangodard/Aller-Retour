@@ -5,27 +5,29 @@
 <body>
   <h1>Espace Conducteur</h1>
 
-  <div class="row" style="padding-left: 10px;padding-right: 10px; ">
-    <div class="col-lg-4">
-      <div class="my-card rubrique" style="margin-bottom: 10px;">
+  <div style="width: 95%;margin: auto;">
+
+  
+  <div class="row justify-content-between" style="width: 100%;margin: 0px;">
+    <div class="col-lg-12 col-xl-4" style="padding: 0px;">
+      <div class="my-card rubrique" style="margin-bottom: 10px;width: 90%;margin-right: auto;margin-left: auto;">
         <h4>Actualités</h4>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="my-card rubrique" style="margin-bottom: 10px;">
-        <h4>Les demandes de trajet</h4>
+    <div class="col-lg-12 col-xl-4" style="padding: 0px;">
+      <div class="my-card rubrique" style="margin-bottom: 10px; width: 90%;margin-right: auto;margin-left: auto;">
+        <h4>Mes trajets en tant que conducteur</h4>
         <div style="overflow: auto;height: 500px;">
-          <%-include('../liste-trajets.ejs')%>
+          <%-include('./mes-trajets-conducteur.ejs')%>
         </div>
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="my-card rubrique">
+    <div class="col-lg-12 col-xl-4" style="padding: 0px;">
+      <div class="my-card rubrique" style="width: 90%;margin-right: auto;margin-left: auto;">
         <h4>Mes actions</h4>
       </div>
     </div>
   </div>
-
+</div>
 </body>
-
 </html>
