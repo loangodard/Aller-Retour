@@ -1,0 +1,40 @@
+<%-include('../includes/header.ejs')%>
+  </head>
+  <%-include('../includes/navigation.ejs')%>
+  <body>
+    <h1>Validez votre trajet avec <%=trajet.passager.prenom%></h1>
+    <div class="container">
+        <div class="my-card" style="padding: 30px;">
+            <h2>Validez le trajet effectué avec <%=trajet.passager.prenom%></h2>
+            <%if(message){%>
+            <div class="alert alert-danger" role="alert">
+                <p><%=message%></p>
+            </div>
+            <%}%>
+            <p>Entrez le <b>code de validation</b> que le passager vous a transmis lors du trajet pour récupérer vos points. S'il a oublié de le vous donner, contacter le par téléphone pour le récupérer <%=trajet.passager.tel%></p>
+            <div style="text-align: center;">
+                <form method="POST" action='/conducteur/valider-trajet'>
+                    <input placeholder="Code de validation" name='code'>
+                    <input type="hidden" name='trajetId' value="<%=trajet._id%>">
+                    <br>
+                    <button class="btn btn-success" style="margin-top: 10px;">Valider</button>
+                </form>
+            </div>
+            <%-include('../trajet-card.ejs')%>
+        </div>
+    </div>
+  </body>
+
+  <style>
+      input{
+          width: 80%;
+          max-width: 400px;
+          padding:10px;
+          font-size: 19px;
+          border: solid grey 0.5px;
+          border-radius: 10px;
+          margin:auto;
+          text-align: center;
+      }
+  </style>
+</html>

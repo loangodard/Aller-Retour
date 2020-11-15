@@ -36,8 +36,10 @@ var upload = multer({
 /* GET */
 router.get('/',isAuth,isConducteur, conducteurControllers.getIndex);
 router.get('/confirmation-trajet/:trajetId',isAuth,isConducteur,isConducteurOfThisTrajet,conducteurControllers.getConfirmationTrajet)
+router.get('/valider-trajet/:trajetId',isAuth,isConducteur,isConducteurOfThisTrajet,conducteurControllers.getValiderTrajet)
 
 /* POST */
 router.post('/devenirConducteurVerification', upload.fields([{name: 'permis'},{name: 'assurance'}]), conducteurControllers.postVerifierPapiers)
+router.post('/valider-trajet',conducteurControllers.postValiderTrajet)
 
 module.exports = router;

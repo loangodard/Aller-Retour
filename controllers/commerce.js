@@ -19,6 +19,7 @@ exports.getIndex = (req, res, next) => {
 
     const commerceId = req.session.user.commerceId
     Commerce.findById(commerceId).then(commerce => {
+        console.log(commerce)
         Produit.find({
             commerce: commerceId
         }).then(produits => {

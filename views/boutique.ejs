@@ -1,0 +1,32 @@
+<%-include('./includes/header.ejs')%>
+<link rel='stylesheet' href='/stylesheets/commerce.css' />
+</head>
+<%-include('./includes/navigation.ejs')%>
+
+<body>
+    <h1>Boutique</h1>
+    <div class="container">
+        <div class="my-card" style="padding: 20px;">
+            <div class="row">
+                <%var i = 0%>
+                <%while(i != 50){%>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="product-card" style="width: 100%;margin-right: 0; margin-left: 0;">
+                            <img class="product-img" src="/images/default.jpg">
+                            <img class="shop-logo" width="70" height="70" style="border-radius: 35px;" src="/images/logo_AR.png">
+                            <h6 style="color: grey;">Nom de la boutique</h6>
+                            <h3>Bon d'achat</h3>
+                            <h4>500 <img src="/images/devise.png" width="20" height="20" class="align-center"></h4>
+                            <div>
+                                <button class="btn acheter">Acheter</button>
+                            </div>
+                        </div>
+                    </div>
+                    <%i=i+1%>
+                <%}%>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

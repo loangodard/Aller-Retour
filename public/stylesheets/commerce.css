@@ -3,44 +3,45 @@
     background-color: white;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
-              0 2px 2px rgba(0,0,0,0.11), 
-              0 4px 4px rgba(0,0,0,0.11), 
-              0 6px 8px rgba(0,0,0,0.11),
-              0 8px 16px rgba(0,0,0,0.11);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11),
+        0 2px 2px rgba(0, 0, 0, 0.11),
+        0 4px 4px rgba(0, 0, 0, 0.11),
+        0 6px 8px rgba(0, 0, 0, 0.11),
+        0 8px 16px rgba(0, 0, 0, 0.11);
     display: inline-block;
-    margin-top:20px;
-    margin-bottom:20px ;
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: 15px;
-    margin-left: 10px ;
+    margin-left: 10px;
 }
 
-.product-card-modal{
+.product-card-modal {
     width: 200px;
     background-color: white;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.11), 
-              0 2px 2px rgba(0,0,0,0.11), 
-              0 4px 4px rgba(0,0,0,0.11), 
-              0 6px 8px rgba(0,0,0,0.11),
-              0 8px 16px rgba(0,0,0,0.11);
-    margin-top:20px;
-    margin-bottom:20px ;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.11),
+        0 2px 2px rgba(0, 0, 0, 0.11),
+        0 4px 4px rgba(0, 0, 0, 0.11),
+        0 6px 8px rgba(0, 0, 0, 0.11),
+        0 8px 16px rgba(0, 0, 0, 0.11);
+    margin-top: 20px;
+    margin-bottom: 20px;
     margin-right: auto;
-    margin-left: auto ;   
+    margin-left: auto;
 }
 
-.product-card-modal .product-img{
+.product-card-modal .product-img {
     border-radius: 10px 10px 0 0;
     width: 100%;
 }
 
-.product-card-modal h3,.product-card h3 {
+.product-card-modal h3,
+.product-card h3 {
     padding-left: 2px;
-    padding-right:2px ;
+    padding-right: 2px;
     padding-bottom: 5px;
-    overflow:hidden;
+    overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -48,9 +49,34 @@
 .product-card .product-img {
     width: 100%;
     border-radius: 10px 10px 0 0;
+    z-index: 1;
 }
 
-.products{
+.shop-logo {
+    z-index: 2;
+    position: relative;
+    top: 0;
+    right: 0;
+}
+
+.products {
     overflow: auto;
-    white-space:nowrap;
+    white-space: nowrap;
+}
+
+.acheter {
+    background-color: #FF5757;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: solid #FF5757;
+}
+
+.acheter:hover {
+    background-color: #B3AADB;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border: solid #B3AADB;
 }

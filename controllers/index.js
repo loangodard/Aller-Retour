@@ -154,3 +154,10 @@ exports.postCheckoutSuccess = (req, res, next) => {
     })
 
 }
+
+exports.getBoutique = (req,res,next) => {
+    res.render('boutique',{
+        pageTitle:'Boutique',
+        isLoggedIn:req.session.isLoggedIn
+    })
+}

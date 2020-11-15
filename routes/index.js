@@ -29,6 +29,7 @@ router.get('/demander-un-trajet/:trajetId/confirmer',isAuth,trajetController.get
 router.get('/demander-un-trajet/:trajetId/demande-recue',isAuth,trajetController.getDemandeRecue)
 router.get('/acheter-points',isAuth,indexController.getAcheterPoints)
 router.get('/acheter-points/:amount',isAuth,indexController.getAchatPoints)
+router.get('/boutique',indexController.getBoutique)
 
 
 /* POST */

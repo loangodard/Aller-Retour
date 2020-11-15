@@ -1,0 +1,43 @@
+<%moment.locale('fr')%>
+<%for (trajet of trajets){%>
+    <%if(trajet.trajetConfirme == false){%>
+        <div class="my-card" style="padding:20px;margin-bottom: 10px;">
+            <h6 style="font-weight: bold;">Valider le trajet pour recevoir vos points</h6>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col" style="text-align: center;"><i class="fas fa-car-side"></i></div>
+                        </div>
+                        <div class="row" style="text-align: center;">
+                            <div class="col" style="text-align: center;"><%=trajet.lieu_depart.ville%> <%=trajet.lieu_arrivee.ville%></div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col" style="text-align: center;"><i class="fas fa-male"></i></div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="text-align: center;"><%=trajet.passager.prenom%> <%=trajet.passager.nom%></div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="row">
+                            <div class="col" style="text-align: center;"><i class="far fa-calendar"></i></div>
+                        </div>
+                        <div class="row">
+                            <div class="col" style="text-align: center;">
+                                <%= moment(trajet.date, "DD/MM/YYYY hh").format('DD/MM/YYYY') %>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            <div style="text-align: center;">
+                <a class="btn btn-success" href='/conducteur/valider-trajet/<%=trajet._id%>'>Valider le trajet</a>
+            </div>
+        </div>
+    <%}%>
+<%}%>

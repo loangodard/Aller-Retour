@@ -105,12 +105,14 @@ exports.postPromouvoirCommercant = (req, res, next) => {
         } else if (user.rang === 'commerce') {
             req.flash('error', 'Cet utilisateur est déjà commerçant');
         } else {
+            const commerce = new Commerce()
             commerce.userId = user._id
             commerce.save()
-            const commerce = new Commerce()
             user.rang = "commerce"
             user.commerceId = commerce._id
             user.save()
+            req.session.user = user
+            req.session.save()
             req.flash('success', 'Utilisateur promu commerçant');
         }
         res.redirect('/admin/promouvoir-commercant')

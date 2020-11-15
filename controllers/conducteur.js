@@ -47,12 +47,53 @@ exports.postVerifierPapiers = (req, res, next) => {
 exports.getConfirmationTrajet = (req,res,next) => {
     const trajetId = req.params.trajetId
     Trajet.findById(trajetId).populate('passager').then(trajet => {
-        console.log(trajet)
         res.render('conducteur/confirmation-trajet.ejs',{
             pageTitle:'Trajet confirmé',
             isLoggedIn:req.session.isLoggedIn,
             trajet:trajet,
             moment:moment
         })
+    })
+}
+
+exports.getValiderTrajet = (req,res,next) => {
+    const trajetId = req.params.trajetId
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+    Trajet.findById(trajetId).populate('passager').then(trajet => {
+        res.render('conducteur/valider-trajet.ejs',{
+            pageTitle:'Validez le trajet',
+            isLoggedIn:req.session.isLoggedIn,
+            trajet:trajet,
+            moment:moment,
+            message:message
+        })
+    })
+}
+
+exports.postValiderTrajet = (req,res,next) => {
+    const trajetId = req.body.trajetId
+    const code = req.body.code
+    Trajet.findById(trajetId).then(trajet=>{
+        if(code == trajet.codeConfirmation){
+            trajet.trajetConfirme = true
+            trajet.save()
+            User.findById(trajet.conducteur).then(user => {
+                var newAmount = Number(user.points.gagnes)
+                newAmount += 300;
+                user.points.gagnes = newAmount
+                req.session.user = user
+                req.session.save()
+                user.save()
+                res.redirect('/conducteur/trajet-valide')
+            })
+        }else{
+            req.flash('error', 'Code incorrect, veuillez réessayer');
+            res.redirect('/conducteur/valider-trajet/'+trajet._id)
+        }
     })
 }
