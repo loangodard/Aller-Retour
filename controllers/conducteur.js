@@ -4,7 +4,7 @@ const Trajet = require('../models/trajet')
 const moment = require('moment')
 
 exports.getIndex = (req, res, next) => {
-    Trajet.find({conducteur:req.session.user._id}).populate('passager').then(trajets => {
+    Trajet.find({conducteur:req.session.user._id,trajetConfirme:false}).populate('passager').then(trajets => {
         res.render('conducteur/index', {
             pageTitle: 'Espace conducteur',
             trajets: sortTrajet.sortTrajets(trajets),
@@ -79,6 +79,7 @@ exports.postValiderTrajet = (req,res,next) => {
     const trajetId = req.body.trajetId
     const code = req.body.code
     Trajet.findById(trajetId).then(trajet=>{
+        const passager = trajet.passager.toString()
         if(code == trajet.codeConfirmation){
             trajet.trajetConfirme = true
             trajet.save()
@@ -89,11 +90,32 @@ exports.postValiderTrajet = (req,res,next) => {
                 req.session.user = user
                 req.session.save()
                 user.save()
+                
+                req.flash('passager', passager);
                 res.redirect('/conducteur/trajet-valide')
             })
         }else{
             req.flash('error', 'Code incorrect, veuillez réessayer');
             res.redirect('/conducteur/valider-trajet/'+trajet._id)
         }
+    })
+}
+
+exports.getTrajetValide = (req,res,next) => {
+    let passager;
+    // passager = req.flash('passager');
+    passager = "5fee5c968c41900cc6074320";
+
+    if(!passager){
+        console.log('here')
+        res.redirect('/conducteur')
+    }
+    User.findById(passager).then(r=>{
+        res.render('conducteur/trajet-valide.ejs',{
+            pageTitle:'Trajet validé',
+            isLoggedIn:req.session.isLoggedIn,
+            moment:moment,
+            passager:r
+        })
     })
 }

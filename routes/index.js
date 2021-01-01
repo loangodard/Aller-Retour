@@ -39,6 +39,7 @@ router.post('/deconnexion',isAuth,authController.postLogout)
 router.post('/conduire',isAuth,isConducteur,indexController.postConduire)
 router.post('/modifier-compte',isAuth,indexController.postModifierCompte)
 router.post('/acheter-points/:amount/success',isAuth,indexController.postCheckoutSuccess)
+router.post('/commenter',isAuth,indexController.postCommenter)
 
 /*POST Tunnel demande de trajet*/
 router.post('/demander-un-trajet',isAuth,trajetController.postDemanderTrajet)

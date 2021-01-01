@@ -1,0 +1,38 @@
+.plus-X-points-card {
+    color: white;
+    font-family: 'Helvetica Neue', serif;
+    font-size: 70px;
+    font-weight: 900;
+    background: rgb(77, 51, 116);
+    background: linear-gradient(120deg, rgba(77, 51, 116, 1) 2%, rgba(255, 87, 87, 1) 100%);
+    width: fit-content;
+    padding: 3px;
+    padding-left:16px;
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    margin: auto;
+    margin-top:50px;
+    margin-bottom: 50px;
+}
+
+.nombre-points {
+    padding: 0px;
+}
+
+.trajet-valide{
+    font-size: 50px;
+}
+
+.avis{
+    border: solid lightgray 1px;
+    background-color: #F8F8F8;
+    border-radius: 20px;
+    max-width: 80%;
+    padding: 20px;
+    margin: auto;
+    margin-bottom: 50px;
+}

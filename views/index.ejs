@@ -1,7 +1,53 @@
 <%-include('./includes/header.ejs')%>
+  <link rel="stylesheet" href="/stylesheets/index.css">
   </head>
   <%-include('./includes/navigation.ejs')%>
   <body>
-    <h1>Index</h1>
+    <section>
+      <div class="container-fluid">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-12 col-md-12 order-12 order-lg-1 col-lg-5 col-xl-4 left-head-line ">
+            <div style="width: 455px; max-width: 95%;margin: auto;">
+              <h2 class="head-line">Le <span style="color: #FF5757;">meilleur moyen</span> d'aller où vous voulez.</h2>
+              <p>Covoiturez avec les habitants du Grand-Sénonais et faites vivre les commerces locaux.</p>
+              <div style="text-align: center;">
+                <a href="/demander-un-trajet" class="btn demander-un-trajet" style="color: #4D3374;">Demander un trajet</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-12 order-1 order-lg-12 col-lg-5 col-xl-4">
+            <img class="mx-auto d-block" style="width:100%;max-width: 500px;" src='/images/index-illustration.svg' >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-2">
+      <div class="container-fluid">
+        <div class="row d-flex justify-content-around align-items-center">
+          <div class="col-8 col-md-3 col-lg-3" style="text-align: center;">
+            <img class="rounded mx-auto d-block" src="/images/pack/1.png">
+            <h4>Passager</h4>
+            <p>
+              Demandez un trajet à la date et l'heure qui vous convient
+            </p>
+          </div>
+          <div class="col-8 col-md-3 col-lg-3" style="text-align: center;">
+            <img class="rounded mx-auto d-block" src="/images/pack/2.png">
+            <h4>Conducteur</h4>
+            <p>
+              Repondez aux demandes de trajets et gagnez des points
+            </p>
+          </div>
+          <div class="col-8 col-md-3 col-lg-3" style="text-align: center;">
+            <img class="rounded mx-auto d-block" src="/images/pack/3.png">
+            <h4>Commerçant</h4>
+            <p>
+              Proposez des produits à échanger contre des points 
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   </body>
 </html>

@@ -9,7 +9,8 @@ exports.postDemanderTrajet = (req, res, next) => {
     const userId = req.session.user._id
     const nouveauTrajet = new Trajet({
         passager: userId,
-        demandeConfirme: false
+        demandeConfirme: false,
+        trajetConfirme : false
     })
     nouveauTrajet.save().then(r => {
         res.redirect('/demander-un-trajet/' + nouveauTrajet._id + '/depart')

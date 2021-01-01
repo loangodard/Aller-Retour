@@ -1,9 +1,53 @@
 <%-include('../includes/header.ejs')%>
+<link rel="stylesheet" href="/stylesheets/plusXpoints.css">
   </head>
   <%-include('../includes/navigation.ejs')%>
   <body>
-    <h1>Trajet validé, merci d'avoir utilisé Aller-Retour pour partager vos trajets</h1>
     <div class="container">
+      <div class="plus-X-points-card">
+        <span class="nbr-points">+300</span> <img src="/images/devise.png" width="90">
+      </div>
+      <p>Bravo, vous avez gagné 200 points pour votre trajet. L'agglomération du Grand-Sénonais est ravi de vous offrir 100 points supplémentaires pour vous remercier d'avoir covoituré !</p>
+    </div>
+
+    <div class="container noter">
+      <h2>Comment s'est passé votre trajet ?</h2>
+      <p>Votre avis nous intéresse ! Laissez un commentaire à <%=passager.prenom%>.</p>
+
+      <form method="POST" action='/commenter'>
+
+      <div class="avis">
+        <div class="row">
+          <div class="col-6">
+            <h3>Laissez un avis à <%=passager.prenom%> </h3>
+          </div>
+          <div class="col-6">
+            <img class="rounded-circle mx-auto d-block" src="/images/profil.jpg" width="80" height="80"/>
+          </div>
+        </div>
+
+        <h4>Note : </h4>
+        <select name="note">
+          <option value="5">Parfait 5/5</option>
+          <option value="4">Très Bien 4/5</option>
+          <option value="3">Bien 3/5</option>
+          <option value="2">Moyen 2/5</option>
+          <option value="1">Mauvais 1/5</option>
+        </select>
+
+        <h4 style="margin-top: 10px;">Commentaire : </h4>
+        <div>
+          <textarea name="commentaire" style="width:100%" placeholder="Comment votre voyage s'est il passé ?"></textarea>
+        </div>
+        <div style="text-align: center;">
+        <button class="btn btn-success">
+          Envoyer
+        </button>
+      </div>
+
+      <input type="hidden" name="userId" value="<%=passager._id%>">
+      </form>
+      </div>
     </div>
   </body>
 </html>

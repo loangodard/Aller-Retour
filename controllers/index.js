@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const Trajet = require('../models/trajet')
 const moment = require('moment');
-
+const math = require('mathjs')
 const randomId = require('../utils/randomId')
 const sortTrajet = require('../utils/sortTrajet')
 
@@ -159,5 +159,35 @@ exports.getBoutique = (req,res,next) => {
     res.render('boutique',{
         pageTitle:'Boutique',
         isLoggedIn:req.session.isLoggedIn
+    })
+}
+
+exports.postCommenter = (req,res,next) => {
+
+    const newNote = req.body.note;
+    const newCommentaire = req.body.commentaire
+    const auteur = req.body.userId
+
+    User.findById(req.body.userId).then(user => {
+        const nouvelAvis = {
+            note: newNote,
+            commentaire: newCommentaire,
+            auteur : auteur
+        }
+        if(user.avis){
+            let actualAvis = user.avis.commentaires
+            var getAllNotes = actualAvis.map(e => e.note);
+            getAllNotes.push(newNote) //Toutes les notes avec la nouvelle incluse
+            user.avis.moyenne = math.mean(getAllNotes)
+            actualAvis.push(nouvelAvis);
+            user.avis.commentaires = actualAvis;
+        }else{
+            user.avis = {
+                moyenne: newNote,
+                commentaires:[nouvelAvis]
+            }
+        }
+        user.save()
+        res.redirect("/conducteur/trajet-valide")
     })
 }

@@ -62,11 +62,28 @@ const userSchema = new Schema({
   commerceId: {
     type: String,
     ref:'Commerce'
+  },
+  avis:{
+    moyenne:{
+      type: Number
+    },
+    commentaires:[
+      {
+        note:{type: Number},
+        commentaire:{type: String},
+        auteur:{type:String, ref:"User"}
+      }
+    ]
   }
+
 });
 
 userSchema.methods.getPoints = function (cb) {
   cb(this.points.achetes + this.points.gagnes)
 };
+
+userSchema.method.nouvelAvis = () => {
+  
+}
 
 module.exports = mongoose.model('User', userSchema);

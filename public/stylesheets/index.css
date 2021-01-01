@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+
+.left-head-line{
+    font-family: 'Helvetica Neue', serif;
+}
+
+
+@media screen and (max-width: 991px) {
+    .left-head-line{
+        text-align: center;
+    }
+
+    .section-2{
+        margin-top: 40px;
+        padding: 0px;
+    }
+
+    .section-2 img{
+        margin-top: 30px;
+    }
+}
+
+h4{
+    font-family: 'Helvetica Neue', serif;
+    margin-top: 5px;
+}
+
+.section-2{
+    background-color: #B3AADB;
+    padding:40px;
+}
+.section-2 img{
+    max-height:250px;
+    max-width: 100%;
+}
+
+.section-2 p{
+    padding:0;
+    margin: 0;
+}

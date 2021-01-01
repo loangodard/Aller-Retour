@@ -6,7 +6,7 @@
 
 
 body {
-  background-color:#EEF2F7;
+  background-color:'white';
   font-family: 'Muli', sans-serif;
   min-height: 100vh;
   margin: 0;
@@ -169,3 +169,19 @@ h1 {
 .ask-passagers:hover{
   outline: none;
 }
+
+.demander-un-trajet{
+  border: solid 1px #4D3374;
+  color: #4D3374;
+}
+
+.demander-un-trajet:hover{
+  border: solid 1px #4D3374;
+  color: #4D3374;
+}
+
+.demander-un-trajet:focus{
+  outline: none;
+  box-shadow: none;
+}
+

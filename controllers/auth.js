@@ -75,6 +75,7 @@ exports.postInscription = (req, res, next) => {
     const tel = req.body.tel
     const password = req.body.password;
     const confirmPassword = req.body.repeatPassword;
+    const avis={}
     if(password !== confirmPassword){
         req.flash('error', 'Les mots de passes sont différents')
         return res.redirect('/inscription')
@@ -108,7 +109,8 @@ exports.postInscription = (req, res, next) => {
                         points:{
                             achetes:0,
                             gagnes:0
-                        }
+                        },
+                        avis:{}
                     });
                     return user.save();
                 })
